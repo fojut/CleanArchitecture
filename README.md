@@ -1,9 +1,9 @@
 # CleanArchitecture
 **Summary**
 -----------------
-This is a sample android app based on MVP clean architecture.
+This is a sample android app based on MVP Clean Architecture.
 
-The UI is not completed yet, just backend code for studying now...
+The UI is not completed yet, just backend code(retrieve users) form server for studying now...
 
 **MVP-Architecture**
 -----------------
