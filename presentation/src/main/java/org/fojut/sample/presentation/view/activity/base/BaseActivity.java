@@ -33,5 +33,9 @@ public abstract class BaseActivity extends Activity {
         return new ActivityModule(this);
     }
 
+    /**
+     * Get view layout by resource id.
+     * @return
+     */
     protected abstract int getLayoutId();
 }
