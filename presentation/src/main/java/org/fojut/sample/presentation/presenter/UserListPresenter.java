@@ -1,6 +1,5 @@
 package org.fojut.sample.presentation.presenter;
 
-import org.fojut.sample.data.entity.UserEntity;
 import org.fojut.sample.data.entity.UserResponseEntity;
 import org.fojut.sample.domain.interactor.base.DefaultSubscriber;
 import org.fojut.sample.domain.interactor.base.UseCase;

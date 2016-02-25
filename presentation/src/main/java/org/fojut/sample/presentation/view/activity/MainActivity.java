@@ -2,7 +2,6 @@ package org.fojut.sample.presentation.view.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.widget.Button;
 import android.widget.RelativeLayout;
 
 import org.fojut.sample.presentation.R;

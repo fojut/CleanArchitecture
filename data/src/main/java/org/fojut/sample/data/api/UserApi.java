@@ -1,10 +1,8 @@
 package org.fojut.sample.data.api;
 
-import org.fojut.sample.data.entity.UserEntity;
 import org.fojut.sample.data.entity.UserResponseEntity;
 
 import java.util.HashMap;
-import java.util.List;
 
 import retrofit.http.Body;
 import retrofit.http.POST;
