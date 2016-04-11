@@ -31,7 +31,7 @@ The UI is not completed yet, just backend code(retrieve users) from server for s
 
 **Using Libraries**
 -----------------
-RxJava + Dagger + Retrofit + ButterKnife 
+RxJava + Dagger2 + Retrofit + ButterKnife 
 
 **Testing**
 -----------------
