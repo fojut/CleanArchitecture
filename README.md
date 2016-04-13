@@ -41,6 +41,6 @@ RxJava + Dagger2 + Retrofit + ButterKnife
 
 - **presentation layer：** Robolectric + junit + mockito
 
-
-
-
+**License**
+-----------------
+<a href="http://opensource.org/licenses/mit-license.html">MIT License</a>
