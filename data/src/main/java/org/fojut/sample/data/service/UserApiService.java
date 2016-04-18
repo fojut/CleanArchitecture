@@ -21,6 +21,6 @@ public class UserApiService extends BaseApiService<UserApi> {
         HashMap<String, String> params = new HashMap<>(2);
         params.put("page", "1");
         params.put("pages", "20");
-        return getApi(UserApi.class).getUserList(params);
+        return getService(UserApi.class).getUserList(params);
     }
 }
