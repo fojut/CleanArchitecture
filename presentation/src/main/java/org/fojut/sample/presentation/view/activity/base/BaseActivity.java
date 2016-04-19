@@ -1,15 +1,18 @@
 package org.fojut.sample.presentation.view.activity.base;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 
+import org.fojut.sample.presentation.R;
 import org.fojut.sample.presentation.internal.di.component.ApplicationComponent;
 import org.fojut.sample.presentation.internal.di.module.ActivityModule;
 import org.fojut.sample.presentation.view.application.BaseApplication;
 
 import butterknife.ButterKnife;
 
-public abstract class BaseActivity extends Activity {
+public abstract class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,6 +20,10 @@ public abstract class BaseActivity extends Activity {
         setContentView(getLayoutId());
         getApplicationComponent().inject(this);
         ButterKnife.bind(this);
+        if(hasToolbar()){
+            initToolbar();
+        }
+        initView();
     }
 
     /**
@@ -38,4 +45,54 @@ public abstract class BaseActivity extends Activity {
      * @return
      */
     protected abstract int getLayoutId();
+
+    /**
+     * Init view
+     */
+    protected abstract void initView();
+
+    /**
+     * If has toolbar
+     * @return
+     */
+    protected abstract boolean hasToolbar();
+
+    /**
+     * Init toolbar
+     */
+    protected void initToolbar(){
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        if (toolbar != null) {
+            setSupportActionBar(toolbar);
+            if (getSupportActionBar() != null && showIndicator()) {
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            }
+        }
+    }
+
+    protected boolean showIndicator(){
+        return true;
+    }
+
+    protected void setToolbarIndicator(int resId) {
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setHomeAsUpIndicator(resId);
+        }
+    }
+
+    protected void setToolbarTitle(String str) {
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(str);
+        }
+    }
+
+    protected void setToolbarTitle(int strId) {
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(strId);
+        }
+    }
+
+    protected ActionBar getToolbar() {
+        return getSupportActionBar();
+    }
 }

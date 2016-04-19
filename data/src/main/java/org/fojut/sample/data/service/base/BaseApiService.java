@@ -19,17 +19,22 @@ public class BaseApiService<T> {
     protected Retrofit retrofit;
 
     public BaseApiService() {
+        retrofit = new Retrofit.Builder().baseUrl(UrlConstant.SERVER_BASE_URL)
+                .client(HttpClient.getInstance()).addConverterFactory(GsonConverterFactory.create(getGson()))
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create()).build();
+    }
 
-        Gson gson = new GsonBuilder()//
+    public BaseApiService(String baseUrl) {
+        retrofit = new Retrofit.Builder().baseUrl(baseUrl)
+                .client(HttpClient.getInstance()).addConverterFactory(GsonConverterFactory.create(getGson()))
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create()).build();
+    }
+
+    protected Gson getGson(){
+        return new GsonBuilder()//
                 .excludeFieldsWithoutExposeAnnotation() //不导出实体中没有用@Expose注解的属性
                 .enableComplexMapKeySerialization() //支持Map的key为复杂对象的形式
                 .serializeNulls().create();
-
-        retrofit = new Retrofit.Builder().baseUrl(UrlConstant.SERVER_BASE_URL)
-                .client(HttpClient.getInstance()).addConverterFactory(GsonConverterFactory.create(gson))
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create()).build();
-
-
     }
 
     protected T getService(Class<T> tClass){
