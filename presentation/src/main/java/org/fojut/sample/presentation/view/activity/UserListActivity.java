@@ -60,8 +60,19 @@ public class UserListActivity extends BaseActivity implements HasComponent<UserC
     }
 
     @Override
+    protected void initView() {
+
+    }
+
+
+    @Override
     protected int getLayoutId() {
         return R.layout.activity_userlist;
+    }
+
+    @Override
+    protected boolean hasToolbar() {
+        return true;
     }
 
     public static Intent getCallingIntent(Context context){

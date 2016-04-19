@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--页面背景色，由于使用侧滑系统背景属性为透明，所以这里自定义一个属性-->
+    <attr name="backgroundColor" format="color|reference"/>
+
+    <!--悬浮按钮的颜色-->
+    <attr name="fabColor" format="color|reference"/>
+
+    <!--toolbar的主题-->
+    <attr name="toolbarTheme" format="reference"/>
+
+    <!--新闻频道管理的背景-->
+    <attr name="itemChannelBackground" format="reference"/>
+
+</resources>

@@ -1,11 +1,66 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+    <style name="BaseAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <!--这是App深色调的基本颜色，主要用于通知栏背景-->
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <!--这是App的主要颜色，用于工具栏背景-->
+        <item name="colorPrimary">@color/primary</item>
+        <!--这是文本的主要颜色，用于工具栏标题-->
+        <item name="android:textColorPrimary">@color/primary_text</item>
+        <!--这是次文本的主要颜色，用于工具栏次标题-->
+        <item name="android:textColorSecondary">@color/secondary_text</item>
+        <!--分割线颜色-->
+        <item name="android:divider">@color/divider</item>
+        <!--强调色-->
+        <item name="colorAccent">@color/accent</item>
+        <!--toolbar searchview hint 颜色-->
+        <item name="android:textColorHint">@color/secondary_text</item>
+
+        <item name="colorControlHighlight">@android:color/transparent</item> 
+
+        <item name="windowActionModeOverlay">true</item>
+
+        <item name="android:windowBackground">@color/background_color</item>
+
+        <item name="android:itemBackground">@color/item_color</item>
+
+        <!--下面是自定义的属性-->
+        <item name="backgroundColor">@color/background_color</item>
+
+        <item name="fabColor">@color/fab_color</item>
+
+        <item name="toolbarTheme">@style/ToolbarTheme</item>
+
+        <item name="itemChannelBackground">@drawable/selector_news_channel</item>
+
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+    <!-- ToolBar菜单样式 -->
+    <style name="ToolbarTheme" parent="@style/Widget.AppCompat.Light.ActionBar">
+        <item name="actionMenuTextColor">@color/material_white</item>
+        <item name="android:textColorPrimary">@color/material_white</item>
+        <item name="android:textColorSecondary">@color/material_white</item>
+        <item name="actionOverflowButtonStyle">@style/ActionButton.Overflow</item>
+    </style>
+
+    <style name="ToolbarThemeNight" parent="@style/Widget.AppCompat.Light.ActionBar">
+        <item name="actionMenuTextColor">@color/material_white</item>
+        <item name="android:textColor">@color/material_white</item>
+        <item name="android:textColorPrimary">@color/material_white</item>
+        <item name="android:textColorSecondary">@color/material_white</item>
+        <item name="actionOverflowButtonStyle">@style/ActionButton.Overflow</item>
+    </style>
+
+    <!--菜单收起来时的三个小点的样式-->
+    <style name="ActionButton.Overflow" parent="android:style/Widget.Holo.Light.ActionButton.Overflow">
+        <item name="android:src">@mipmap/ic_menu_over_flow</item>
     </style>
 
 </resources>
