@@ -2,9 +2,11 @@ package org.fojut.sample.presentation.view.activity;
 
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -18,6 +20,7 @@ import org.fojut.sample.presentation.presenter.UserListPresenter;
 import org.fojut.sample.presentation.view.activity.base.BaseActivity;
 import org.fojut.sample.presentation.view.adapter.UserModelAdapter;
 import org.fojut.sample.presentation.view.render.RenderView;
+import org.fojut.sample.presentation.view.widget.ProgressHUD;
 
 import java.util.List;
 
@@ -46,6 +49,8 @@ public class UserListActivity extends BaseActivity implements HasComponent<UserC
     ListView mListView;
 
     private UserComponent userComponent;
+
+    private ProgressHUD mProgressHUD;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +84,7 @@ public class UserListActivity extends BaseActivity implements HasComponent<UserC
         return new Intent(context, UserListActivity.class);
     }
 
-    private void initializeInjector() {
+    public void initializeInjector() {
         this.userComponent = DaggerUserComponent.builder()
                 .applicationComponent(getApplicationComponent())
                 .activityModule(getActivityModule())
@@ -125,16 +130,22 @@ public class UserListActivity extends BaseActivity implements HasComponent<UserC
 
     @Override
     public void hideLoading() {
-        //TODO hide loading dialog
+        mProgressHUD.dismiss();
     }
 
     @Override
     public void showLoading() {
-        //TODO show loading dialog
+        mProgressHUD = ProgressHUD.show(this, getString(R.string.loading_text), true, true, new DialogInterface.OnCancelListener(){
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                mProgressHUD.dismiss();
+            }
+        });
     }
 
     @Override
     public void showError(String message) {
-        //TODO show error message
+        Log.e(TAG, message);
+        mProgressHUD.setMessage(getString(R.string.loading_failure));
     }
 }

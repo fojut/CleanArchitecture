@@ -5,6 +5,8 @@ import org.fojut.sample.domain.executor.PostExecutionThread;
 import org.fojut.sample.domain.executor.ThreadExecutor;
 import org.fojut.sample.domain.interactor.base.UseCase;
 
+import java.util.HashMap;
+
 import javax.inject.Inject;
 
 import rx.Observable;
@@ -23,5 +25,10 @@ public class GetUserListUseCase extends UseCase {
     @Override
     protected Observable buildUseCaseObservable() {
         return UserApiService.getInstance().getUserList();
+    }
+
+    @Override
+    protected Observable buildUseCaseObservableWithParam(Object ...param) {
+        return null;
     }
 }

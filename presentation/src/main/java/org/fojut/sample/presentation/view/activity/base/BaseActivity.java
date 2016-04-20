@@ -9,10 +9,13 @@ import org.fojut.sample.presentation.R;
 import org.fojut.sample.presentation.internal.di.component.ApplicationComponent;
 import org.fojut.sample.presentation.internal.di.module.ActivityModule;
 import org.fojut.sample.presentation.view.application.BaseApplication;
+import org.fojut.sample.presentation.view.widget.ProgressHUD;
 
 import butterknife.ButterKnife;
 
 public abstract class BaseActivity extends AppCompatActivity {
+
+//    protected ProgressHUD mProgressHUD;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

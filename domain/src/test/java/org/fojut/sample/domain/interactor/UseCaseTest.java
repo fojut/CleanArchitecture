@@ -66,5 +66,10 @@ public class UseCaseTest {
         @Override public void execute(Subscriber UseCaseSubscriber) {
             super.execute(UseCaseSubscriber);
         }
+
+        @Override
+        protected Observable buildUseCaseObservableWithParam(Object... param) {
+            return null;
+        }
     }
 }

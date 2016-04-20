@@ -1,22 +1,36 @@
 package org.fojut.sample.presentation.view.adapter;
 
+import android.content.Context;
 import android.support.v4.view.PagerAdapter;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import org.fojut.sample.presentation.R;
+
 import java.util.List;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 /**
  * Created by fojut on 2016/4/19.
  */
 public class ViewPagerAdapter extends PagerAdapter {
 
+    private static final String TAG = ViewPagerAdapter.class.getSimpleName();
+
+    private Context context;
     private List<View> viewList;
     private List<String> titleList;
+    private RecyclerView.Adapter dataAdapter;
 
-    public ViewPagerAdapter(List<View> viewList, List<String> titleList) {
+    public ViewPagerAdapter(Context context, List<View> viewList, List<String> titleList, RecyclerView.Adapter dataAdapter) {
+        this.context = context;
         this.viewList = viewList;
         this.titleList = titleList;
+        this.dataAdapter = dataAdapter;
     }
 
     @Override
@@ -26,8 +40,12 @@ public class ViewPagerAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        container.addView(viewList.get(position));
-        return viewList.get(position);
+        View view = viewList.get(position);
+        ViewHolder viewHolder = new ViewHolder(view);
+        viewHolder.newsListView.setLayoutManager(new LinearLayoutManager(context));
+        viewHolder.newsListView.setAdapter(dataAdapter);
+        container.addView(view);
+        return view;
     }
 
     @Override
@@ -48,5 +66,18 @@ public class ViewPagerAdapter extends PagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         return titleList.get(position);
+    }
+
+    public void updateDataAdapter(){
+        dataAdapter.notifyDataSetChanged();
+    }
+
+    public class ViewHolder{
+        @Bind(R.id.rv_news)
+        RecyclerView newsListView;
+
+        public ViewHolder(View view) {
+            ButterKnife.bind(this, view);
+        }
     }
 }

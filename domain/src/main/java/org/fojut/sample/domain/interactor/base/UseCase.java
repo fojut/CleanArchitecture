@@ -4,6 +4,7 @@ import org.fojut.sample.domain.constant.Constant;
 import org.fojut.sample.domain.executor.PostExecutionThread;
 import org.fojut.sample.domain.executor.ThreadExecutor;
 
+import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
@@ -46,6 +47,25 @@ public abstract class UseCase {
     @SuppressWarnings("unchecked")
     public void execute(Subscriber useCaseSubscriber) {
         this.subscription = this.buildUseCaseObservable()
+                .subscribeOn(Schedulers.from(threadExecutor))
+                .observeOn(postExecutionThread.getScheduler())
+                .subscribe(useCaseSubscriber);
+    }
+
+    /**
+     * Builds an {@link Observable} with param map which will be used when executing the current {@link UseCase}.
+     */
+    protected abstract Observable buildUseCaseObservableWithParam(Object ...param);
+
+    /**
+     * Executes the current use case.
+     *
+     * @param useCaseSubscriber The guy who will be listen to the observable build
+     * with {@link #buildUseCaseObservable()}.
+     */
+    @SuppressWarnings("unchecked")
+    public void executeWithParam(Subscriber useCaseSubscriber, Object ...param) {
+        this.subscription = this.buildUseCaseObservableWithParam(param)
                 .subscribeOn(Schedulers.from(threadExecutor))
                 .observeOn(postExecutionThread.getScheduler())
                 .subscribe(useCaseSubscriber);
