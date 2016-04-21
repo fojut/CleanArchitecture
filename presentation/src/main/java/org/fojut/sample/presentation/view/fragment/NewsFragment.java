@@ -48,7 +48,7 @@ public class NewsFragment extends BaseFragment implements HasComponent<NewsCompo
     @Nullable @Bind(R.id.tabs)
     TabLayout tabLayout;
 
-    private int selectedPosition = -1;      //-1为初次进入，还没有选择任何tab，需要初始化第一个tab的数据
+    private int selectedPosition = 0;
 
     private ProgressHUD mProgressHUD;
 
@@ -78,7 +78,7 @@ public class NewsFragment extends BaseFragment implements HasComponent<NewsCompo
         getComponent().inject(this);
         this.newsListPresenter.setRenderView(this);
 
-        if(viewPager.getAdapter() == null && viewPagerAdapter == null){
+        if(viewPager.getAdapter() == null){
             View view1 = LayoutInflater.from(getContext()).inflate(R.layout.viewpager_news, null);
             View view2 = LayoutInflater.from(getContext()).inflate(R.layout.viewpager_news, null);
             View view3 = LayoutInflater.from(getContext()).inflate(R.layout.viewpager_news, null);
@@ -98,29 +98,10 @@ public class NewsFragment extends BaseFragment implements HasComponent<NewsCompo
 
             viewPagerAdapter = new ViewPagerAdapter(getContext(), viewList, titleList, newsEntityAdapter);
             viewPager.setAdapter(viewPagerAdapter);
-        }else{
-            viewPager.setAdapter(viewPagerAdapter);
         }
 
-        /*
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            public void onPageScrollStateChanged(int arg0) {
-                Log.d(TAG, "--------changed:" + arg0);
-            }
-
-            @Override
-            public void onPageScrolled(int arg0, float arg1, int arg2) {
-                Log.d(TAG, "-------scrolled arg0:" + arg0);
-                Log.d(TAG, "-------scrolled arg1:" + arg1);
-                Log.d(TAG, "-------scrolled arg2:" + arg2);
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                Log.d(TAG, "------selected:" + position);
-            }
-        });
-        */
+        viewPager.setCurrentItem(selectedPosition);
+        loadDataByPosition(selectedPosition);
 
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.setScrollPosition(0, 0, true);
@@ -128,22 +109,13 @@ public class NewsFragment extends BaseFragment implements HasComponent<NewsCompo
 
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                selectedPosition = tab.getPosition();
-                viewPager.setCurrentItem(tab.getPosition(), true);
-                switch (tab.getPosition()){
-                    case 0:     //社会
-                        initData("social", "social", newsNum, newsPage);
-                        break;
-                    case 1:     //体育
-                        initData("tiyu", "tiyu", newsNum, newsPage);
-                        break;
-                    case 2:     //娱乐
-                        initData("huabian", "newtop", newsNum, newsPage);
-                        break;
-                    case 3:     //科技
-                        initData("keji", "keji", newsNum, newsPage);
-                        break;
+                if(selectedPosition != tab.getPosition()){
+                    selectedPosition = tab.getPosition();
+                    if(viewPager.getCurrentItem() != tab.getPosition()){
+                        viewPager.setCurrentItem(tab.getPosition());
+                    }
                 }
+                loadDataByPosition(selectedPosition);
             }
 
             @Override
@@ -157,10 +129,7 @@ public class NewsFragment extends BaseFragment implements HasComponent<NewsCompo
             }
         });
 
-        viewPager.setCurrentItem(selectedPosition);
-        if(selectedPosition < 0){
-            initData("social", "social", newsNum, newsPage);
-        }
+
     }
 
     private void initData(String type, String path, int num, int page){
@@ -217,5 +186,26 @@ public class NewsFragment extends BaseFragment implements HasComponent<NewsCompo
         return DaggerNewsComponent.builder()
                 .applicationComponent(getApplicationComponent())
                 .activityModule(getActivityModule()).build();
+    }
+
+    /**
+     * Load data by selected position
+     * @param position
+     */
+    private void loadDataByPosition(int position){
+        switch (position){
+            case 0:     //社会
+                initData("social", "social", newsNum, newsPage);
+                break;
+            case 1:     //体育
+                initData("tiyu", "tiyu", newsNum, newsPage);
+                break;
+            case 2:     //娱乐
+                initData("huabian", "newtop", newsNum, newsPage);
+                break;
+            case 3:     //科技
+                initData("keji", "keji", newsNum, newsPage);
+                break;
+        }
     }
 }
