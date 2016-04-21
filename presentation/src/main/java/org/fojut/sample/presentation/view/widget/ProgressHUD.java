@@ -61,4 +61,11 @@ public class ProgressHUD extends Dialog {
         dialog.show();
         return dialog;
     }
+
+    public static boolean isShowing(Dialog dialog) {
+        if(dialog == null){
+            return false;
+        }else
+            return dialog.isShowing();
+    }
 }

@@ -7,9 +7,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?attr/colorPrimary"
-    app:tabGravity="center"
+    app:tabGravity="fill"
     app:tabIndicatorColor="@color/material_white"
-    app:tabMode="scrollable"
+    app:tabMode="fixed"
     app:tabSelectedTextColor="@color/material_white"
     app:tabTextColor="@color/material_grey_300"
     tools:ignore="PrivateResource"/>

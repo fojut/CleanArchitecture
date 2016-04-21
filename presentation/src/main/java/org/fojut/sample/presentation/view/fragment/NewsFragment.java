@@ -13,6 +13,7 @@ import org.fojut.sample.presentation.R;
 import org.fojut.sample.presentation.internal.di.component.DaggerNewsComponent;
 import org.fojut.sample.presentation.internal.di.component.NewsComponent;
 import org.fojut.sample.presentation.internal.di.extra.HasComponent;
+import org.fojut.sample.presentation.model.NewsChannelEntity;
 import org.fojut.sample.presentation.model.NewsEntity;
 import org.fojut.sample.presentation.presenter.NewsListPresenter;
 import org.fojut.sample.presentation.view.adapter.NewsEntityAdapter;
@@ -22,6 +23,8 @@ import org.fojut.sample.presentation.view.render.RenderView;
 import org.fojut.sample.presentation.view.widget.ProgressHUD;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -58,6 +61,8 @@ public class NewsFragment extends BaseFragment implements HasComponent<NewsCompo
     private int newsNum = 20;
     private int newsPage = 1;
 
+    private List<NewsChannelEntity> newsChannelEntityList;
+
     /**
      * Constructor
      */
@@ -79,22 +84,24 @@ public class NewsFragment extends BaseFragment implements HasComponent<NewsCompo
         this.newsListPresenter.setRenderView(this);
 
         if(viewPager.getAdapter() == null){
-            View view1 = LayoutInflater.from(getContext()).inflate(R.layout.viewpager_news, null);
-            View view2 = LayoutInflater.from(getContext()).inflate(R.layout.viewpager_news, null);
-            View view3 = LayoutInflater.from(getContext()).inflate(R.layout.viewpager_news, null);
-            View view4 = LayoutInflater.from(getContext()).inflate(R.layout.viewpager_news, null);
+            newsChannelEntityList = new ArrayList<>();
+            newsChannelEntityList.add(new NewsChannelEntity("社会", "social", "social", 0));
+            newsChannelEntityList.add(new NewsChannelEntity("体育", "tiyu", "tiyu", 1));
+            newsChannelEntityList.add(new NewsChannelEntity("娱乐", "huabian", "newtop", 2));
+            newsChannelEntityList.add(new NewsChannelEntity("科技", "keji", "keji", 3));
+            Collections.sort(newsChannelEntityList, new Comparator<NewsChannelEntity>() {
+                @Override
+                public int compare(NewsChannelEntity entity1, NewsChannelEntity entity2) {
+                    return entity1.getPriority() - entity2.getPriority();
+                }
+            });
 
             viewList = new ArrayList<>();
-            viewList.add(view1);
-            viewList.add(view2);
-            viewList.add(view3);
-            viewList.add(view4);
-
             titleList = new ArrayList<>();
-            titleList.add("社会");
-            titleList.add("体育");
-            titleList.add("娱乐");
-            titleList.add("科技");
+            for (NewsChannelEntity newsChannelEntity : newsChannelEntityList){
+                viewList.add(LayoutInflater.from(getContext()).inflate(R.layout.viewpager_news, null));
+                titleList.add(newsChannelEntity.getTitle());
+            }
 
             viewPagerAdapter = new ViewPagerAdapter(getContext(), viewList, titleList, newsEntityAdapter);
             viewPager.setAdapter(viewPagerAdapter);
@@ -144,17 +151,21 @@ public class NewsFragment extends BaseFragment implements HasComponent<NewsCompo
 
     @Override
     public void showLoading() {
-        mProgressHUD = ProgressHUD.show(getContext(), getString(R.string.loading_text), true, true, new DialogInterface.OnCancelListener(){
-            @Override
-            public void onCancel(DialogInterface dialog) {
-                mProgressHUD.dismiss();
-            }
-        });
+        if(!ProgressHUD.isShowing(mProgressHUD)){
+            mProgressHUD = ProgressHUD.show(getContext(), getString(R.string.loading_text), true, true, new DialogInterface.OnCancelListener(){
+                @Override
+                public void onCancel(DialogInterface dialog) {
+                    mProgressHUD.dismiss();
+                }
+            });
+        }
     }
 
     @Override
     public void hideLoading() {
-        mProgressHUD.dismiss();
+        if(ProgressHUD.isShowing(mProgressHUD)) {
+            mProgressHUD.dismiss();
+        }
     }
 
     @Override
@@ -193,19 +204,6 @@ public class NewsFragment extends BaseFragment implements HasComponent<NewsCompo
      * @param position
      */
     private void loadDataByPosition(int position){
-        switch (position){
-            case 0:     //社会
-                initData("social", "social", newsNum, newsPage);
-                break;
-            case 1:     //体育
-                initData("tiyu", "tiyu", newsNum, newsPage);
-                break;
-            case 2:     //娱乐
-                initData("huabian", "newtop", newsNum, newsPage);
-                break;
-            case 3:     //科技
-                initData("keji", "keji", newsNum, newsPage);
-                break;
-        }
+        initData(newsChannelEntityList.get(position).getUrlType(), newsChannelEntityList.get(position).getUrlPath(), newsNum, newsPage);
     }
 }

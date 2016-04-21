@@ -39,7 +39,7 @@ public class GetUserListTest {
         this.getUserListUseCase = new GetUserListUseCase(mockThreadExecutor, mockPostExecutionThread){
 
             @Override
-            protected Observable buildUseCaseObservable() {
+            protected Observable buildUseCaseObservable(Object ...params) {
                 String[] arrays = {"peter", "fojut", "sam"};
                 return Observable.from(arrays);
             }
