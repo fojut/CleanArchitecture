@@ -8,6 +8,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.RelativeLayout;
 
 import com.roughike.bottombar.BottomBar;
@@ -91,6 +94,22 @@ public class MainActivity extends BaseActivity {
     @Override
     protected boolean showIndicator() {
         return false;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.action_login:
+                Log.d(TAG, "MenuItem: login action is selected!");
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     /**

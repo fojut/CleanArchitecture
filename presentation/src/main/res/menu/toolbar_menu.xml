@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="org.fojut.sample.presentation.view.activity.MainActivity" >
+
+    <item
+        android:id="@+id/action_login"
+        android:icon="@mipmap/ic_menu_login_action"
+        android:orderInCategory="1"
+        app:showAsAction="always"
+        android:title="登陆"/>
+
+</menu>
