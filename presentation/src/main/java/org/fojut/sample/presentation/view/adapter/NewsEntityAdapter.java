@@ -8,6 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+
 import org.fojut.sample.presentation.R;
 import org.fojut.sample.presentation.internal.di.scope.PerActivity;
 import org.fojut.sample.presentation.model.NewsEntity;
@@ -28,9 +31,11 @@ public class NewsEntityAdapter extends RecyclerView.Adapter<NewsEntityAdapter.Vi
 
     private List<NewsEntity> newsEntityList;
     private final LayoutInflater layoutInflater;
+    private final Context mContext;
 
     @Inject
     public NewsEntityAdapter(Context context) {
+        this.mContext = context;
         this.layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.newsEntityList = new ArrayList<>();
     }
@@ -44,6 +49,9 @@ public class NewsEntityAdapter extends RecyclerView.Adapter<NewsEntityAdapter.Vi
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
         NewsEntity newsEntity = newsEntityList.get(position);
+        Glide.with(mContext).load(newsEntity.getPicUrl()).asBitmap().animate(R.anim.image_load)
+                .diskCacheStrategy(DiskCacheStrategy.ALL).placeholder(R.mipmap.ic_loading)
+                .error(R.mipmap.ic_fail).into(viewHolder.photo);
         viewHolder.title.setText(newsEntity.getTitle());
         viewHolder.desc.setText(newsEntity.getDescription());
         viewHolder.time.setText(newsEntity.getTime());

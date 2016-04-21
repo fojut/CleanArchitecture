@@ -6,6 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="1dp"
     app:cardBackgroundColor="?android:attr/itemBackground"
     app:cardCornerRadius="2dp"
     app:cardElevation="0dp">
@@ -14,15 +15,15 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
+        android:layout_margin="5dp"
         android:orientation="vertical">
         <!--android:background="?android:attr/itemBackground"-->
 
         <ImageView
             android:id="@+id/iv_news_summary_photo"
-            android:layout_width="72dp"
-            android:layout_height="72dp"
-            android:layout_margin="4dp"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:layout_margin="5dp"
             android:scaleType="centerCrop"
             android:transitionName="photos"/>
 
@@ -32,6 +33,8 @@
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/iv_news_summary_photo"
             android:layout_toRightOf="@+id/iv_news_summary_photo"
+            android:layout_marginTop="4dp"
+            android:layout_marginLeft="4dp"
             android:gravity="center_vertical"
             android:singleLine="true"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
@@ -46,11 +49,11 @@
             android:layout_alignBottom="@+id/iv_news_summary_photo"
             android:layout_alignLeft="@+id/tv_news_summary_title"
             android:layout_below="@+id/tv_news_summary_title"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="6dp"
             android:ellipsize="end"
             android:lines="2"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            android:textColor="?android:attr/textColorPrimary"
+            android:textColor="?android:attr/textColorSecondary"
             android:textSize="@dimen/text_size_normal"
             tools:text="中国油价的48%交税了，美国价税分离，价是价，税是税。"/>
 
