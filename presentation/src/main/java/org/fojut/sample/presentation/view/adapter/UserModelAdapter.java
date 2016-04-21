@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import org.fojut.sample.presentation.R;
 import org.fojut.sample.presentation.internal.di.scope.PerActivity;
-import org.fojut.sample.presentation.model.UserModel;
+import org.fojut.sample.presentation.model.UserEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,32 +22,32 @@ import butterknife.ButterKnife;
 
 @PerActivity
 public class UserModelAdapter extends BaseAdapter {
-    private List<UserModel> userModelList;
+    private List<UserEntity> userEntityList;
     private final LayoutInflater layoutInflater;
 
     @Inject
     public UserModelAdapter(Context context) {
         this.layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        this.userModelList = new ArrayList<>();
+        this.userEntityList = new ArrayList<>();
     }
 
-    public void setUserModelList(List<UserModel> userModelList) {
-        this.userModelList = userModelList;
+    public void setUserEntityList(List<UserEntity> userEntityList) {
+        this.userEntityList = userEntityList;
     }
 
-    public void updateDataList(List<UserModel> userModelList){
-        setUserModelList(userModelList);
+    public void updateDataList(List<UserEntity> userEntityList){
+        setUserEntityList(userEntityList);
         notifyDataSetChanged();
     }
 
     @Override
     public int getCount() {
-        return (this.userModelList != null) ? this.userModelList.size() : 0;
+        return (this.userEntityList != null) ? this.userEntityList.size() : 0;
     }
 
     @Override
     public Object getItem(int position) {
-        return userModelList.get(position);
+        return userEntityList.get(position);
     }
 
     @Override
@@ -74,7 +74,7 @@ public class UserModelAdapter extends BaseAdapter {
      * Set data to view component
      */
     public void setData(int position, ViewHolder viewHolder){
-        UserModel userModel = userModelList.get(position);
+        UserEntity userModel = userEntityList.get(position);
         viewHolder.textView.setText(userModel.toString());
     }
 

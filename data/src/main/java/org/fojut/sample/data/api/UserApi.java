@@ -1,6 +1,6 @@
 package org.fojut.sample.data.api;
 
-import org.fojut.sample.data.entity.UserResponseEntity;
+import org.fojut.sample.data.dto.UserResponseDto;
 
 import java.util.HashMap;
 
@@ -11,6 +11,6 @@ import rx.Observable;
 public interface UserApi {
 
     @POST("/api/user/list")
-    Observable<UserResponseEntity> getUserList(@Body HashMap<String, String> params);
+    Observable<UserResponseDto> getUserList(@Body HashMap<String, String> params);
 
 }

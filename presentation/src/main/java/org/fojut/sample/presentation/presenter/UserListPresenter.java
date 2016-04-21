@@ -1,15 +1,13 @@
 package org.fojut.sample.presentation.presenter;
 
-import org.fojut.sample.data.entity.UserResponseEntity;
+import org.fojut.sample.data.dto.UserResponseDto;
 import org.fojut.sample.domain.interactor.base.DefaultSubscriber;
 import org.fojut.sample.domain.interactor.base.UseCase;
 import org.fojut.sample.presentation.internal.di.scope.PerActivity;
-import org.fojut.sample.presentation.mapper.UserModelDataMapper;
+import org.fojut.sample.presentation.mapper.UserEntityMapper;
 import org.fojut.sample.presentation.presenter.base.BasePresenter;
 import org.fojut.sample.presentation.presenter.extra.HasRenderView;
 import org.fojut.sample.presentation.view.render.RenderView;
-
-import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -20,12 +18,12 @@ public class UserListPresenter implements BasePresenter, HasRenderView<RenderVie
     private RenderView renderView;
 
     private final UseCase getUserListUseCase;
-    private final UserModelDataMapper userModelDataMapper;
+    private final UserEntityMapper userEntityMapper;
 
     @Inject
-    public UserListPresenter(@Named("userList") UseCase getUserListUseCase, UserModelDataMapper userModelDataMapper) {
+    public UserListPresenter(@Named("userList") UseCase getUserListUseCase, UserEntityMapper userEntityMapper) {
         this.getUserListUseCase = getUserListUseCase;
-        this.userModelDataMapper = userModelDataMapper;
+        this.userEntityMapper = userEntityMapper;
     }
 
     @Override
@@ -61,7 +59,7 @@ public class UserListPresenter implements BasePresenter, HasRenderView<RenderVie
         this.getUserListUseCase.execute(new UserListSubscriber());
     }
 
-    private final class UserListSubscriber extends DefaultSubscriber<UserResponseEntity> {
+    private final class UserListSubscriber extends DefaultSubscriber<UserResponseDto> {
 
         @Override public void onCompleted() {
             renderView.hideLoading();
@@ -71,8 +69,8 @@ public class UserListPresenter implements BasePresenter, HasRenderView<RenderVie
             renderView.showError(e.getMessage());
         }
 
-        @Override public void onNext(UserResponseEntity userResponseEntity) {
-            renderView.renderView(userModelDataMapper.transform(userResponseEntity.getData().getList()));
+        @Override public void onNext(UserResponseDto userResponseDto) {
+            renderView.renderView(userEntityMapper.transform(userResponseDto.getData().getList()));
         }
     }
 }

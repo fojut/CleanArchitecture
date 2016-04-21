@@ -1,9 +1,9 @@
-package org.fojut.sample.data.entity;
+package org.fojut.sample.data.dto;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class UserEntity {
+public class UserDto {
 
     @Expose @SerializedName("id")
     private int id;
@@ -38,7 +38,7 @@ public class UserEntity {
 
     @Override
     public String toString() {
-        return "UserEntity{" +
+        return "UserDto{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +

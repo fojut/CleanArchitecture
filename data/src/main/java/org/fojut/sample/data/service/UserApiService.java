@@ -1,7 +1,7 @@
 package org.fojut.sample.data.service;
 
 import org.fojut.sample.data.api.UserApi;
-import org.fojut.sample.data.entity.UserResponseEntity;
+import org.fojut.sample.data.dto.UserResponseDto;
 import org.fojut.sample.data.service.base.BaseApiService;
 
 import java.util.HashMap;
@@ -17,7 +17,7 @@ public class UserApiService extends BaseApiService<UserApi> {
         return SingletonHolder.instance;
     }
 
-    public Observable<UserResponseEntity> getUserList(){
+    public Observable<UserResponseDto> getUserList(){
         HashMap<String, String> params = new HashMap<>(2);
         params.put("page", "1");
         params.put("pages", "20");

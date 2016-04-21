@@ -1,16 +1,16 @@
-package org.fojut.sample.data.entity;
+package org.fojut.sample.data.dto;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class UserResponseEntity {
+public class UserResponseDto {
 
     @Expose @SerializedName("code")
     private String code;
     @Expose @SerializedName("msg")
     private String msg;
     @Expose @SerializedName("data")
-    private UserListEntity data;
+    private UserListDto data;
 
 
     public String getCode() {
@@ -21,11 +21,11 @@ public class UserResponseEntity {
         this.code = code;
     }
 
-    public UserListEntity getData() {
+    public UserListDto getData() {
         return data;
     }
 
-    public void setData(UserListEntity data) {
+    public void setData(UserListDto data) {
         this.data = data;
     }
 

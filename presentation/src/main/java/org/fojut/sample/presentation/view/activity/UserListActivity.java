@@ -15,7 +15,7 @@ import org.fojut.sample.presentation.R;
 import org.fojut.sample.presentation.internal.di.extra.HasComponent;
 import org.fojut.sample.presentation.internal.di.component.DaggerUserComponent;
 import org.fojut.sample.presentation.internal.di.component.UserComponent;
-import org.fojut.sample.presentation.model.UserModel;
+import org.fojut.sample.presentation.model.UserEntity;
 import org.fojut.sample.presentation.presenter.UserListPresenter;
 import org.fojut.sample.presentation.view.activity.base.BaseActivity;
 import org.fojut.sample.presentation.view.adapter.UserModelAdapter;
@@ -29,7 +29,7 @@ import javax.inject.Inject;
 import butterknife.Bind;
 
 public class UserListActivity extends BaseActivity implements HasComponent<UserComponent>,
-        RenderView<List<UserModel>> {
+        RenderView<List<UserEntity>> {
 
     private static final String TAG = UserListActivity.class.getSimpleName();
 
@@ -124,7 +124,7 @@ public class UserListActivity extends BaseActivity implements HasComponent<UserC
     }
 
     @Override
-    public void renderView(List<UserModel> data) {
+    public void renderView(List<UserEntity> data) {
         userModelAdapter.updateDataList(data);
     }
 

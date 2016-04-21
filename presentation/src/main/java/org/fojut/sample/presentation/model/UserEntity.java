@@ -1,6 +1,6 @@
 package org.fojut.sample.presentation.model;
 
-public class UserModel {
+public class UserEntity {
 
     private int id;
     private String username;
@@ -32,7 +32,7 @@ public class UserModel {
 
     @Override
     public String toString() {
-        return "UserModel{" +
+        return "UserEntity{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +

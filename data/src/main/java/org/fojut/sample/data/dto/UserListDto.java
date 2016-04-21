@@ -1,34 +1,34 @@
-package org.fojut.sample.data.entity;
+package org.fojut.sample.data.dto;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class UserListEntity {
+public class UserListDto {
 
     @Expose @SerializedName("list")
-    private List<UserEntity> list;
+    private List<UserDto> list;
 
-    public List<UserEntity> getList() {
+    public List<UserDto> getList() {
         return list;
     }
 
-    public void setList(List<UserEntity> list) {
+    public void setList(List<UserDto> list) {
         this.list = list;
     }
 
     @Override
     public String toString() {
-        return "UserListEntity{" +
+        return "UserListDto{" +
                 list2String(list)+
                 '}';
     }
 
-    public String list2String(List<UserEntity> list){
+    public String list2String(List<UserDto> list){
         StringBuffer stringBuffer = new StringBuffer("");
-        for (UserEntity userEntity :list){
-            stringBuffer.append(userEntity.toString()+"; ");
+        for (UserDto userDto :list){
+            stringBuffer.append(userDto.toString()+"; ");
         }
         return stringBuffer.toString();
     }

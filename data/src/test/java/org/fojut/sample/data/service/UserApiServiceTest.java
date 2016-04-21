@@ -1,9 +1,7 @@
 package org.fojut.sample.data.service;
 
-import android.util.Log;
-
 import org.fojut.sample.data.application.ApplicationTestCase;
-import org.fojut.sample.data.entity.UserResponseEntity;
+import org.fojut.sample.data.dto.UserResponseDto;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
@@ -33,13 +31,13 @@ public class UserApiServiceTest extends ApplicationTestCase {
 
     @Test
     public void testGetUsersCase(){
-        Observable<UserResponseEntity> userEntityObservable = UserApiService.getInstance().getUserList();
+        Observable<UserResponseDto> userEntityObservable = UserApiService.getInstance().getUserList();
         Assert.assertNotNull(userEntityObservable);
 
         Subscription subscription = userEntityObservable
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.newThread())
-                .subscribe(new Subscriber<UserResponseEntity>() {
+                .subscribe(new Subscriber<UserResponseDto>() {
                     @Override
                     public void onCompleted() {
                         System.out.println("Completed!");
@@ -51,7 +49,7 @@ public class UserApiServiceTest extends ApplicationTestCase {
                     }
 
                     @Override
-                    public void onNext(UserResponseEntity userResponseEntity) {
+                    public void onNext(UserResponseDto userResponseEntity) {
                         System.out.println("OnNext code => "+userResponseEntity.getCode()+", OnNext size => "+userResponseEntity.getData().getList().size()
                                 +", list => "+userResponseEntity.getData().getList().toString());
                     }
