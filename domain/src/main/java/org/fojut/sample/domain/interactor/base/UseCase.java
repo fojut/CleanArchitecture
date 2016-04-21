@@ -36,36 +36,17 @@ public abstract class UseCase {
     /**
      * Builds an {@link Observable} which will be used when executing the current {@link UseCase}.
      */
-    protected abstract Observable buildUseCaseObservable();
+    protected abstract Observable buildUseCaseObservable(Object ...params);
 
     /**
      * Executes the current use case.
      *
      * @param useCaseSubscriber The guy who will be listen to the observable build
-     * with {@link #buildUseCaseObservable()}.
+     * with {@link #buildUseCaseObservable)}.
      */
     @SuppressWarnings("unchecked")
-    public void execute(Subscriber useCaseSubscriber) {
-        this.subscription = this.buildUseCaseObservable()
-                .subscribeOn(Schedulers.from(threadExecutor))
-                .observeOn(postExecutionThread.getScheduler())
-                .subscribe(useCaseSubscriber);
-    }
-
-    /**
-     * Builds an {@link Observable} with param map which will be used when executing the current {@link UseCase}.
-     */
-    protected abstract Observable buildUseCaseObservableWithParam(Object ...param);
-
-    /**
-     * Executes the current use case.
-     *
-     * @param useCaseSubscriber The guy who will be listen to the observable build
-     * with {@link #buildUseCaseObservable()}.
-     */
-    @SuppressWarnings("unchecked")
-    public void executeWithParam(Subscriber useCaseSubscriber, Object ...param) {
-        this.subscription = this.buildUseCaseObservableWithParam(param)
+    public void execute(Subscriber useCaseSubscriber, Object ...params) {
+        this.subscription = this.buildUseCaseObservable(params)
                 .subscribeOn(Schedulers.from(threadExecutor))
                 .observeOn(postExecutionThread.getScheduler())
                 .subscribe(useCaseSubscriber);

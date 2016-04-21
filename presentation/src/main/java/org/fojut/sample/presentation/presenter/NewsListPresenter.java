@@ -59,7 +59,7 @@ public class NewsListPresenter implements BasePresenter, HasRenderView<RenderVie
     }
 
     private void getNewsList(String type, String path, int num, int page){
-        this.getNewsListUseCase.executeWithParam(new NewsListSubscriber(), type, path, num, page);
+        this.getNewsListUseCase.execute(new NewsListSubscriber(), type, path, num, page);
     }
 
     private final class NewsListSubscriber extends DefaultSubscriber<NewsListDto> {

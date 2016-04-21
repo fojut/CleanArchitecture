@@ -59,17 +59,13 @@ public class UseCaseTest {
             super(threadExecutor, postExecutionThread);
         }
 
-        @Override protected Observable buildUseCaseObservable() {
+        @Override protected Observable buildUseCaseObservable(Object ...params) {
             return Observable.empty();
         }
 
-        @Override public void execute(Subscriber UseCaseSubscriber) {
+        @Override public void execute(Subscriber UseCaseSubscriber, Object ...params) {
             super.execute(UseCaseSubscriber);
         }
 
-        @Override
-        protected Observable buildUseCaseObservableWithParam(Object... param) {
-            return null;
-        }
     }
 }

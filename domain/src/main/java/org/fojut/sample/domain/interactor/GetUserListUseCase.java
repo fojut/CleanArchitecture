@@ -23,12 +23,7 @@ public class GetUserListUseCase extends UseCase {
     }
 
     @Override
-    protected Observable buildUseCaseObservable() {
+    protected Observable buildUseCaseObservable(Object ...params) {
         return UserApiService.getInstance().getUserList();
-    }
-
-    @Override
-    protected Observable buildUseCaseObservableWithParam(Object ...param) {
-        return null;
     }
 }
