@@ -43,7 +43,7 @@ RxJava + Dagger2 + Retrofit2 + OkHttp3 + ButterKnife
 
 **License**
 -----------------
-    Copyright 2014 fojut
+    Copyright 2015 fojut
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
