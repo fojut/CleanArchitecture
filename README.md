@@ -35,11 +35,11 @@ RxJava + Dagger2 + Retrofit2 + OkHttp3 + ButterKnife
 
 **Testing**
 -----------------
-- **data layer：** Android instrumentation / espresso
+- **data layer：** Robolectric + JUnit + Mockito
 
-- **domain layer：** JUnit + mockito
+- **domain layer：** JUnit + Mockito
 
-- **presentation layer：** Robolectric + junit + mockito
+- **presentation layer：** Android instrumentation / Espresso + JUnit + Mockito
 
 **License**
 -----------------
