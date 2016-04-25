@@ -3,7 +3,7 @@
 -----------------
 This is a sample android app based on MVP Clean Architecture.
 
-The UI is not completed yet, just backend code(retrieve users) from server for studying now...
+The UI is not completed yet, just retrieve news from server...
 
 **MVP-Architecture**
 -----------------
