@@ -23,11 +23,11 @@ The UI is not completed yet, just retrieve news from server...
 
 **Project Structure**
 -----------------
-- **data：** Data Repository, Request Service for Rest API, Request Client
+- **data：** DTO, Request Service for Rest API, Request Client
 
 - **domain：** Use Case
 
-- **presentation：** Presenters, Views, Thread Executor, Domain and Data Mapper
+- **presentation：** Models, Presenters, Views, Thread Executor
 
 **Using Libraries**
 -----------------
