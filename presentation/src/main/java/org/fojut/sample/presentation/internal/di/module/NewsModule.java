@@ -4,6 +4,8 @@ import org.fojut.sample.domain.interactor.GetNewsListUseCase;
 import org.fojut.sample.domain.interactor.base.UseCase;
 import org.fojut.sample.presentation.internal.di.scope.PerActivity;
 
+import javax.inject.Named;
+
 import dagger.Module;
 import dagger.Provides;
 
@@ -17,7 +19,7 @@ public class NewsModule {
     public NewsModule() {
     }
 
-    @Provides @PerActivity
+    @Provides @PerActivity @Named("getNewsList")
     UseCase provideGetNewsListUseCase(GetNewsListUseCase getNewsList) {
         return getNewsList;
     }

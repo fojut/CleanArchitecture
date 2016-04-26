@@ -1,5 +1,6 @@
 package org.fojut.sample.presentation.view.fragment.base;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,7 +10,6 @@ import android.view.ViewGroup;
 
 import org.fojut.sample.presentation.internal.di.component.ApplicationComponent;
 import org.fojut.sample.presentation.internal.di.module.ActivityModule;
-import org.fojut.sample.presentation.view.activity.base.BaseActivity;
 import org.fojut.sample.presentation.view.application.BaseApplication;
 
 import butterknife.ButterKnife;
@@ -52,6 +52,11 @@ public abstract class BaseFragment extends Fragment {
      */
     protected abstract void initView();
 
-
+    /**
+     * Get Context
+     */
+    public Context context(){
+        return getContext();
+    }
 
 }

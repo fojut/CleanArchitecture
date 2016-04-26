@@ -19,7 +19,6 @@ import org.fojut.sample.presentation.model.UserEntity;
 import org.fojut.sample.presentation.presenter.UserListPresenter;
 import org.fojut.sample.presentation.view.activity.base.BaseActivity;
 import org.fojut.sample.presentation.view.adapter.UserModelAdapter;
-import org.fojut.sample.presentation.view.render.RenderView;
 import org.fojut.sample.presentation.view.widget.ProgressHUD;
 
 import java.util.List;
@@ -29,7 +28,7 @@ import javax.inject.Inject;
 import butterknife.Bind;
 
 public class UserListActivity extends BaseActivity implements HasComponent<UserComponent>,
-        RenderView<List<UserEntity>> {
+        UserListPresenter.View<List<UserEntity>> {
 
     private static final String TAG = UserListActivity.class.getSimpleName();
 
@@ -57,7 +56,7 @@ public class UserListActivity extends BaseActivity implements HasComponent<UserC
         super.onCreate(savedInstanceState);
         initializeInjector();
         getComponent().inject(this);
-        this.userListPresenter.setRenderView(this);
+        this.userListPresenter.setView(this);
 
         if (savedInstanceState == null) {
             initData();
@@ -124,7 +123,7 @@ public class UserListActivity extends BaseActivity implements HasComponent<UserC
     }
 
     @Override
-    public void renderView(List<UserEntity> data) {
+    public void loadData(List<UserEntity> data) {
         userModelAdapter.updateDataList(data);
     }
 

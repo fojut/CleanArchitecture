@@ -6,16 +6,13 @@ import org.fojut.sample.domain.interactor.base.UseCase;
 import org.fojut.sample.presentation.internal.di.scope.PerActivity;
 import org.fojut.sample.presentation.mapper.UserEntityMapper;
 import org.fojut.sample.presentation.presenter.base.BasePresenter;
-import org.fojut.sample.presentation.presenter.extra.HasRenderView;
-import org.fojut.sample.presentation.view.render.RenderView;
+import org.fojut.sample.presentation.view.render.LoadDataView;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
 @PerActivity
-public class UserListPresenter implements BasePresenter, HasRenderView<RenderView> {
-
-    private RenderView renderView;
+public class UserListPresenter extends BasePresenter<UserListPresenter.View> {
 
     private final UseCase getUserListUseCase;
     private final UserEntityMapper userEntityMapper;
@@ -24,11 +21,6 @@ public class UserListPresenter implements BasePresenter, HasRenderView<RenderVie
     public UserListPresenter(@Named("userList") UseCase getUserListUseCase, UserEntityMapper userEntityMapper) {
         this.getUserListUseCase = getUserListUseCase;
         this.userEntityMapper = userEntityMapper;
-    }
-
-    @Override
-    public void setRenderView(RenderView renderView) {
-        this.renderView = renderView;
     }
 
     @Override
@@ -44,14 +36,14 @@ public class UserListPresenter implements BasePresenter, HasRenderView<RenderVie
     @Override
     public void onDestroy() {
         this.getUserListUseCase.unsubscribe();
-        this.renderView = null;
+        setView(null);
     }
 
     /**
      * Loads all users.
      */
     public void loadUserList() {
-        this.renderView.showLoading();
+        getView().showLoading();
         this.getUserList();
     }
 
@@ -62,15 +54,19 @@ public class UserListPresenter implements BasePresenter, HasRenderView<RenderVie
     private final class UserListSubscriber extends DefaultSubscriber<UserResponseDto> {
 
         @Override public void onCompleted() {
-            renderView.hideLoading();
+            getView().hideLoading();
         }
 
         @Override public void onError(Throwable e) {
-            renderView.showError(e.getMessage());
+            getView().showError(e.getMessage());
         }
 
         @Override public void onNext(UserResponseDto userResponseDto) {
-            renderView.renderView(userEntityMapper.transform(userResponseDto.getData().getList()));
+            getView().loadData(userEntityMapper.transform(userResponseDto.getData().getList()));
         }
+    }
+
+    public interface View<D> extends LoadDataView<D> {
+
     }
 }

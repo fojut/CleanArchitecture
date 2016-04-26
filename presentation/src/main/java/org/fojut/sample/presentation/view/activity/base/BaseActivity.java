@@ -1,5 +1,6 @@
 package org.fojut.sample.presentation.view.activity.base;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -9,13 +10,10 @@ import org.fojut.sample.presentation.R;
 import org.fojut.sample.presentation.internal.di.component.ApplicationComponent;
 import org.fojut.sample.presentation.internal.di.module.ActivityModule;
 import org.fojut.sample.presentation.view.application.BaseApplication;
-import org.fojut.sample.presentation.view.widget.ProgressHUD;
 
 import butterknife.ButterKnife;
 
 public abstract class BaseActivity extends AppCompatActivity {
-
-//    protected ProgressHUD mProgressHUD;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +46,14 @@ public abstract class BaseActivity extends AppCompatActivity {
      * @return
      */
     protected abstract int getLayoutId();
+
+    /**
+     * Get Context
+     * @return
+     */
+    public Context context(){
+        return getApplicationComponent().context();
+    }
 
     /**
      * Init view

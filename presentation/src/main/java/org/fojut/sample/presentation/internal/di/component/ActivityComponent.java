@@ -20,6 +20,7 @@ import android.app.Activity;
 
 import org.fojut.sample.presentation.internal.di.module.ActivityModule;
 import org.fojut.sample.presentation.internal.di.scope.PerActivity;
+import org.fojut.sample.presentation.view.activity.MainActivity;
 
 import dagger.Component;
 
@@ -30,6 +31,8 @@ import dagger.Component;
 @PerActivity
 @Component(dependencies = ApplicationComponent.class, modules = ActivityModule.class)
 public interface ActivityComponent {
+  void inject(MainActivity mainActivity);
+
   //Exposed to sub-graphs.
   Activity activity();
 }
