@@ -129,6 +129,11 @@ public class NewsFragment extends BaseFragment implements HasComponent<NewsCompo
     }
 
     @Override
+    public int getViewPagerLayoutId() {
+        return R.layout.viewpager_news;
+    }
+
+    @Override
     public void initViewPages() {
         if(viewPager.getAdapter() == null){
             this.newsListPresenter.loadNewsChannelList();

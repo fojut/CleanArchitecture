@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import org.fojut.sample.data.news.dto.NewsListDto;
 import org.fojut.sample.domain.base.interactor.DefaultSubscriber;
 import org.fojut.sample.domain.base.interactor.UseCase;
-import org.fojut.sample.presentation.R;
 import org.fojut.sample.presentation.base.internal.di.scope.PerActivity;
 import org.fojut.sample.presentation.news.mapper.NewsEntityMapper;
 import org.fojut.sample.presentation.news.model.NewsChannelEntity;
@@ -79,7 +78,7 @@ public class NewsListPresenter extends BasePresenter<NewsListPresenter.View> {
     public List<android.view.View> getNewsChannelViewList(){
         List<android.view.View> viewList = new ArrayList<>();
         for (int i=0; i<getNewsChannelEntityList().size(); i++){
-            viewList.add(LayoutInflater.from(getView().context()).inflate(R.layout.viewpager_news, null));
+            viewList.add(LayoutInflater.from(getView().context()).inflate(getView().getViewPagerLayoutId(), null));
         }
         return viewList;
     }
@@ -125,6 +124,7 @@ public class NewsListPresenter extends BasePresenter<NewsListPresenter.View> {
     }
 
     public interface View<D> extends LoadDataView<D> {
+        int getViewPagerLayoutId();
         void initViewPages();
         void initTabLayout();
     }
