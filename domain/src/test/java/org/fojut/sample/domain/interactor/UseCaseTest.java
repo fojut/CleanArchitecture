@@ -1,8 +1,8 @@
 package org.fojut.sample.domain.interactor;
 
-import org.fojut.sample.domain.executor.PostExecutionThread;
-import org.fojut.sample.domain.executor.ThreadExecutor;
-import org.fojut.sample.domain.interactor.base.UseCase;
+import org.fojut.sample.domain.base.executor.PostExecutionThread;
+import org.fojut.sample.domain.base.executor.ThreadExecutor;
+import org.fojut.sample.domain.base.interactor.UseCase;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;

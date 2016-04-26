@@ -1,25 +1,20 @@
 package org.fojut.sample.domain.interactor;
 
-import org.fojut.sample.domain.executor.PostExecutionThread;
-import org.fojut.sample.domain.executor.ThreadExecutor;
-import org.fojut.sample.domain.interactor.base.DefaultSubscriber;
+import org.fojut.sample.domain.base.executor.PostExecutionThread;
+import org.fojut.sample.domain.base.executor.ThreadExecutor;
+import org.fojut.sample.domain.base.interactor.DefaultSubscriber;
+import org.fojut.sample.domain.user.interactor.GetUserListUseCase;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import java.util.List;
-
 import rx.Observable;
-import rx.Subscriber;
 import rx.Subscription;
-import rx.observers.TestSubscriber;
 import rx.schedulers.Schedulers;
-import rx.schedulers.TestScheduler;
 
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
 
 public class GetUserListTest {
 
@@ -39,7 +34,7 @@ public class GetUserListTest {
         this.getUserListUseCase = new GetUserListUseCase(mockThreadExecutor, mockPostExecutionThread){
 
             @Override
-            protected Observable buildUseCaseObservable(Object ...params) {
+            public Observable buildUseCaseObservable(Object ...params) {
                 String[] arrays = {"peter", "fojut", "sam"};
                 return Observable.from(arrays);
             }

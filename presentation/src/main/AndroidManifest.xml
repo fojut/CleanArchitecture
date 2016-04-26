@@ -6,13 +6,13 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:name=".view.application.BaseApplication"
+        android:name=".base.view.application.BaseApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/BaseAppTheme">
-        <activity android:name=".view.activity.MainActivity">
+        <activity android:name=".main.view.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".view.activity.UserListActivity"/>
+        <activity android:name=".user.view.activity.UserListActivity"/>
     </application>
 
 </manifest>

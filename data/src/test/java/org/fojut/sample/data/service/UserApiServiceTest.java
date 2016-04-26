@@ -1,7 +1,8 @@
 package org.fojut.sample.data.service;
 
 import org.fojut.sample.data.application.ApplicationTestCase;
-import org.fojut.sample.data.dto.UserResponseDto;
+import org.fojut.sample.data.user.dto.UserResponseDto;
+import org.fojut.sample.data.user.service.UserApiService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;

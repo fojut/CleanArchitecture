@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="org.fojut.sample.presentation.view.activity.MainActivity" >
+    tools:context=".main.view.activity.MainActivity" >
 
     <item
         android:id="@+id/action_login"
