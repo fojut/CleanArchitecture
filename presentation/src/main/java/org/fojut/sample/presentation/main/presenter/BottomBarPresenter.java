@@ -7,7 +7,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import org.fojut.sample.presentation.R;
-import org.fojut.sample.presentation.base.constant.FragmentConstant;
+import org.fojut.sample.presentation.base.constant.FragmentConstants;
 import org.fojut.sample.presentation.base.internal.di.scope.PerActivity;
 import org.fojut.sample.presentation.base.presenter.BasePresenter;
 import org.fojut.sample.presentation.main.view.fragment.ImageFragment;
@@ -71,7 +71,7 @@ public class BottomBarPresenter extends BasePresenter<BottomBarPresenter.View> {
      */
     public void setDefaultFirstFragment(){
         Log.i(TAG, "setDefaultFirstFragment start... currentFragment = " + this.currentFragmentTag);
-        setFragmentSelection(FragmentConstant.FRAGMENT_TAG_FLAG_1);
+        setFragmentSelection(FragmentConstants.FRAGMENT_TAG_FLAG_1);
         Log.i(TAG, "setDefaultFirstFragment end...");
     }
 
@@ -131,16 +131,16 @@ public class BottomBarPresenter extends BasePresenter<BottomBarPresenter.View> {
 
         if(fragment == null){
             switch(tag) {
-                case FragmentConstant.FRAGMENT_TAG_FLAG_1:
+                case FragmentConstants.FRAGMENT_TAG_FLAG_1:
                     fragment = NewsFragment.newInstance();
                     break;
-                case FragmentConstant.FRAGMENT_TAG_FLAG_2:
+                case FragmentConstants.FRAGMENT_TAG_FLAG_2:
                     fragment = ImageFragment.newInstance();
                     break;
-                case FragmentConstant.FRAGMENT_TAG_FLAG_3:
+                case FragmentConstants.FRAGMENT_TAG_FLAG_3:
                     fragment = VideoFragment.newInstance();
                     break;
-                case FragmentConstant.FRAGMENT_TAG_FLAG_4:
+                case FragmentConstants.FRAGMENT_TAG_FLAG_4:
                     fragment = SettingFragment.newInstance();
                     break;
                 default:
@@ -189,16 +189,16 @@ public class BottomBarPresenter extends BasePresenter<BottomBarPresenter.View> {
     public void setBottomBarSelection(int menuItemId){
         switch (menuItemId){
             case R.id.item_news:
-                setFragmentSelection(FragmentConstant.FRAGMENT_TAG_FLAG_1);
+                setFragmentSelection(FragmentConstants.FRAGMENT_TAG_FLAG_1);
                 break;
             case R.id.item_image:
-                setFragmentSelection(FragmentConstant.FRAGMENT_TAG_FLAG_2);
+                setFragmentSelection(FragmentConstants.FRAGMENT_TAG_FLAG_2);
                 break;
             case R.id.item_video:
-                setFragmentSelection(FragmentConstant.FRAGMENT_TAG_FLAG_3);
+                setFragmentSelection(FragmentConstants.FRAGMENT_TAG_FLAG_3);
                 break;
             case R.id.item_setting:
-                setFragmentSelection(FragmentConstant.FRAGMENT_TAG_FLAG_4);
+                setFragmentSelection(FragmentConstants.FRAGMENT_TAG_FLAG_4);
                 break;
             default:
                 Log.e(TAG, "Menu item id not config!");

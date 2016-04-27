@@ -1,6 +1,6 @@
 package org.fojut.sample.data.news.api;
 
-import org.fojut.sample.data.news.constant.NewsApiConstant;
+import org.fojut.sample.data.news.constant.NewsApiConstants;
 import org.fojut.sample.data.news.dto.NewsListDto;
 
 
@@ -16,6 +16,6 @@ public interface NewsApi {
 
     @GET("/txapi/{type}/{path}")
     Observable<NewsListDto> getNewsList(@Path("type") String type, @Path("path") String path,
-                                        @Query(NewsApiConstant.PARAM_NUM) int num,
-                                        @Query(NewsApiConstant.PARAM_PAGE) int page);
+                                        @Query(NewsApiConstants.PARAM_NUM) int num,
+                                        @Query(NewsApiConstants.PARAM_PAGE) int page);
 }

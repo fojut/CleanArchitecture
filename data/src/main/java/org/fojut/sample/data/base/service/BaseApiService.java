@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import org.fojut.sample.data.base.client.HttpClient;
-import org.fojut.sample.data.base.constant.BaseApiConstant;
+import org.fojut.sample.data.base.constant.BaseApiConstants;
 
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -19,7 +19,7 @@ public class BaseApiService<T> {
     protected Retrofit retrofit;
 
     public BaseApiService() {
-        retrofit = new Retrofit.Builder().baseUrl(BaseApiConstant.SERVER_BASE_URL)
+        retrofit = new Retrofit.Builder().baseUrl(BaseApiConstants.SERVER_BASE_URL)
                 .client(HttpClient.getInstance()).addConverterFactory(GsonConverterFactory.create(getGson()))
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create()).build();
     }

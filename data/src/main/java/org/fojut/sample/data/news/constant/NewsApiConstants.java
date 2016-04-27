@@ -3,7 +3,7 @@ package org.fojut.sample.data.news.constant;
 /**
  * Created by fojut on 2016/4/26.
  */
-public class NewsApiConstant {
+public class NewsApiConstants {
     public static final String NEWS_HOST_URL = "http://apis.baidu.com";
 
     public static final String PARAM_NUM = "num";

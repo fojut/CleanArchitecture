@@ -1,7 +1,7 @@
 package org.fojut.sample.data.news.service;
 
 import org.fojut.sample.data.news.api.NewsApi;
-import org.fojut.sample.data.news.constant.NewsApiConstant;
+import org.fojut.sample.data.news.constant.NewsApiConstants;
 import org.fojut.sample.data.news.dto.NewsListDto;
 import org.fojut.sample.data.base.service.BaseApiService;
 
@@ -18,7 +18,7 @@ public class NewsApiService extends BaseApiService<NewsApi> {
     }
 
     private static class SingletonHolder{
-        private static NewsApiService instance = new NewsApiService(NewsApiConstant.NEWS_HOST_URL);
+        private static NewsApiService instance = new NewsApiService(NewsApiConstants.NEWS_HOST_URL);
     }
 
     public static NewsApiService getInstance(){
