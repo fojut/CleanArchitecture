@@ -19,9 +19,7 @@ public class BaseApiService<T> {
     protected Retrofit retrofit;
 
     public BaseApiService() {
-        retrofit = new Retrofit.Builder().baseUrl(BaseApiConstants.SERVER_BASE_URL)
-                .client(HttpClient.getInstance()).addConverterFactory(GsonConverterFactory.create(getGson()))
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create()).build();
+        this(BaseApiConstants.SERVER_BASE_URL);
     }
 
     public BaseApiService(String baseUrl) {
