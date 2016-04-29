@@ -1,14 +1,15 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.neenbedankt.android-apt'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    compileSdkVersion rootProject.ext.androidCompileSdkVersion
+    buildToolsVersion rootProject.ext.androidBuildToolsVersion
 
     defaultConfig {
-        minSdkVersion 22
-        targetSdkVersion 23
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion rootProject.ext.androidMinSdkVersion
+        targetSdkVersion rootProject.ext.androidTargetSdkVersion
+        versionCode rootProject.ext.androidVersionCode
+        versionName rootProject.ext.androidVersionName
     }
     buildTypes {
         release {
@@ -19,16 +20,17 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    def domainDependencies = rootProject.ext.domainDependencies
+    def domainTestDependencies = rootProject.ext.domainTestDependencies
 
+    compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':data')
 
-    provided 'com.google.dagger:dagger-compiler:2.0.2'
-    provided 'javax.annotation:jsr250-api:1.0'
+    apt domainDependencies.daggerCompiler
+    provided domainDependencies.javaxAnnotation
+    compile domainDependencies.dagger
+    compile domainDependencies.rxJava
 
-    compile 'com.google.dagger:dagger:2.0.2'
-    compile 'io.reactivex:rxjava:1.1.3'
-
-    testCompile 'junit:junit:4.12'
-    testCompile 'org.mockito:mockito-core:1.9.5'
+    testCompile domainTestDependencies.junit
+    testCompile domainTestDependencies.mockito
 }
