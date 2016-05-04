@@ -23,15 +23,15 @@ The UI is not completed yet, just retrieve news from server...
 
 **Project Structure**
 -----------------
-- **data：** DTO, Request Service for Rest API, Request Client
+- **data：** DTO, Request Service for Rest API, Request Client, SQLite Database Service
 
-- **domain：** Use Case
+- **domain：** Use Cases
 
 - **presentation：** Models, Presenters, Views, Thread Executor
 
 **Using Libraries**
 -----------------
-RxJava + Dagger2 + Retrofit2 + OkHttp3 + ButterKnife 
+RxJava + Dagger2 + Retrofit2 + OkHttp3 + ButterKnife + StorIO
 
 **Testing**
 -----------------
