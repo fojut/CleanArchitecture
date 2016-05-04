@@ -6,13 +6,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="1dp"
-    app:cardBackgroundColor="?android:attr/itemBackground"
-    app:cardCornerRadius="2dp"
-    app:cardElevation="0dp">
+    android:clickable="true"
+    android:layout_margin="@dimen/card_margin">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
