@@ -94,6 +94,7 @@ public class NewsListPresenter extends BasePresenter<NewsListPresenter.View> {
      * Load news list.
      */
     public void loadNewsList(){
+        getView().resetSwipeRefreshLayout();
         getView().showLoading();
         this.getNewsList();
     }
@@ -123,6 +124,7 @@ public class NewsListPresenter extends BasePresenter<NewsListPresenter.View> {
         int getViewPagerLayoutId();
         void initViewPages(List<NewsChannelEntity> newsChannels);
         void initTabLayout();
+        void resetSwipeRefreshLayout();
     }
 
 

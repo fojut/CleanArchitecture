@@ -1,6 +1,5 @@
 package org.fojut.sample.presentation.main.view.fragment;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -12,7 +11,6 @@ import android.widget.Toast;
 import org.fojut.sample.presentation.R;
 import org.fojut.sample.presentation.base.internal.di.extra.HasComponent;
 import org.fojut.sample.presentation.base.view.fragment.BaseFragment;
-import org.fojut.sample.presentation.base.view.widget.ProgressHUD;
 import org.fojut.sample.presentation.image.internal.di.component.DaggerImageComponent;
 import org.fojut.sample.presentation.image.internal.di.component.ImageComponent;
 import org.fojut.sample.presentation.image.model.ImageEntity;

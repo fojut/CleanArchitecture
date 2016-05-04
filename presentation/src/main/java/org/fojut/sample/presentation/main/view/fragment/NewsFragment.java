@@ -1,11 +1,12 @@
 package org.fojut.sample.presentation.main.view.fragment;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
+import android.widget.Toast;
 
 import org.fojut.sample.presentation.R;
 import org.fojut.sample.presentation.news.internal.di.component.DaggerNewsComponent;
@@ -18,7 +19,6 @@ import org.fojut.sample.presentation.news.presenter.NewsListPresenter;
 import org.fojut.sample.presentation.news.view.adapter.NewsEntityAdapter;
 import org.fojut.sample.presentation.main.view.adapter.ViewPagerAdapter;
 import org.fojut.sample.presentation.base.view.fragment.BaseFragment;
-import org.fojut.sample.presentation.base.view.widget.ProgressHUD;
 
 import java.util.List;
 
@@ -30,7 +30,7 @@ import butterknife.Bind;
  * Created by fojut on 2016/4/19.
  */
 public class NewsFragment extends BaseFragment implements HasComponent<NewsComponent>,
-        NewsListPresenter.View<List<NewsEntity>>, NewsChannelPresenter.View {
+        NewsListPresenter.View<List<NewsEntity>>, NewsChannelPresenter.View, SwipeRefreshLayout.OnRefreshListener {
 
     private static final String TAG = NewsFragment.class.getSimpleName();
 
@@ -48,9 +48,8 @@ public class NewsFragment extends BaseFragment implements HasComponent<NewsCompo
     @Nullable @Bind(R.id.tabs)
     TabLayout tabLayout;
 
-    private ProgressHUD mProgressHUD;
-
     private ViewPagerAdapter viewPagerAdapter;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     /**
      * Constructor
@@ -84,27 +83,22 @@ public class NewsFragment extends BaseFragment implements HasComponent<NewsCompo
 
     @Override
     public void showLoading() {
-        if(!ProgressHUD.isShowing(mProgressHUD)){
-            mProgressHUD = ProgressHUD.show(getContext(), getString(R.string.loading_text), true, true, new DialogInterface.OnCancelListener(){
-                @Override
-                public void onCancel(DialogInterface dialog) {
-                    mProgressHUD.dismiss();
-                }
-            });
+        if(mSwipeRefreshLayout!=null){
+            mSwipeRefreshLayout.setRefreshing(true);
         }
     }
 
     @Override
     public void hideLoading() {
-        if(ProgressHUD.isShowing(mProgressHUD)) {
-            mProgressHUD.dismiss();
+        if(mSwipeRefreshLayout!=null){
+            mSwipeRefreshLayout.setRefreshing(false);
         }
     }
 
     @Override
     public void showError(String message) {
         Log.e(TAG, message);
-        mProgressHUD.setMessage(getString(R.string.loading_failure));
+        Toast.makeText(context(), R.string.loading_failure, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -166,7 +160,7 @@ public class NewsFragment extends BaseFragment implements HasComponent<NewsCompo
                     if(viewPager.getCurrentItem() != tab.getPosition()){
                         viewPager.setCurrentItem(tab.getPosition());
                     }
-                    newsListPresenter.loadNewsList();
+                    onRefresh();
                 }
             }
 
@@ -180,14 +174,24 @@ public class NewsFragment extends BaseFragment implements HasComponent<NewsCompo
 
             }
         });
+    }
 
-
+    @Override
+    public void resetSwipeRefreshLayout() {
+        mSwipeRefreshLayout = viewPagerAdapter.getItemSwipeRefreshLayoutByPosition(viewPager.getCurrentItem());
+        mSwipeRefreshLayout.setOnRefreshListener(this);
     }
 
     @Override
     public void loadChannels(List<NewsChannelEntity> newsChannels) {
         initViewPages(newsChannels);
         initTabLayout();
+        onRefresh();
+    }
+
+    @Override
+    public void onRefresh() {
         newsListPresenter.loadNewsList();
     }
+
 }
