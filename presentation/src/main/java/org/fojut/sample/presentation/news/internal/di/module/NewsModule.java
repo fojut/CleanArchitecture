@@ -1,5 +1,6 @@
 package org.fojut.sample.presentation.news.internal.di.module;
 
+import org.fojut.sample.domain.news.interactor.GetNewsChannelListUseCase;
 import org.fojut.sample.domain.news.interactor.GetNewsListUseCase;
 import org.fojut.sample.domain.base.interactor.UseCase;
 import org.fojut.sample.presentation.base.internal.di.scope.PerActivity;
@@ -22,5 +23,10 @@ public class NewsModule {
     @Provides @PerActivity @Named("getNewsList")
     UseCase provideGetNewsListUseCase(GetNewsListUseCase getNewsList) {
         return getNewsList;
+    }
+
+    @Provides @PerActivity @Named("getNewsChannelList")
+    UseCase provideGetNewsChannelList(GetNewsChannelListUseCase getNewsChannelList){
+        return getNewsChannelList;
     }
 }

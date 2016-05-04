@@ -37,6 +37,13 @@ dependencies {
     compile dataDependencies.glide                                                      // glide加载图片
     compile dataDependencies.glideOkhttp                                                // 使用okhttp3加载图片
 
+    compile dataDependencies.storIOSQLite                                               //操作sqlite数据库
+    compile dataDependencies.storIOSQLiteAnnotations                                    //sqlite annotation
+    apt dataDependencies.storIOSQLiteAnnotationsProcessor
+    compile dataDependencies.storIOContentResolver                                      //操作content-resolver
+    compile dataDependencies.storIOContentResolverAnnotations                           //content-resolver annotation
+    apt dataDependencies.storIOContentResolverAnnotationsProcessor
+
     compile dataDependencies.gson
     compile dataDependencies.rxJava
     compile dataDependencies.rxAndroid

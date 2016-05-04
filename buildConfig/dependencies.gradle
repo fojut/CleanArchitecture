@@ -9,19 +9,19 @@ ext {
     androidVersionName = "1.0"
 
     //Libraries
-    androidSupportVersion = '23.2.1'
-    daggerVersion = '2.0.2'
-    butterKnifeVersion = '7.0.1'
-    rxJavaVersion = '1.1.3'
-    rxAndroidVersion = '1.1.0'
-    javaxAnnotationVersion = '1.0'
-    gsonVersion = '2.3'
-    retrofitVersion = '2.0.2'
-    okHttpVersion = '3.2.0'
-    glideVersion = '3.7.0'
-    glideOkhttp3Version = '1.4.0@aar'
-    bottomBarVersion = '1.3.3'
-
+    androidSupportVersion = '23.2.1'                    //Android support
+    daggerVersion = '2.0.2'                             //Dependence inject
+    butterKnifeVersion = '7.0.1'                        //View Dependence inject
+    rxJavaVersion = '1.1.3'                             //Reactive programing for java
+    rxAndroidVersion = '1.1.0'                          //Reactive programing for android
+    javaxAnnotationVersion = '1.0'                      //Java annotation
+    gsonVersion = '2.3'                                 //Json converter
+    retrofitVersion = '2.0.2'                           //retrofit2
+    okHttpVersion = '3.2.0'                             //okHttp3
+    glideVersion = '3.7.0'                              //Image Loader
+    glideOkhttp3Version = '1.4.0@aar'                   //Image Load with okHttp3
+    bottomBarVersion = '1.3.3'                          //UI bottom bar
+    storioVersion = '1.8.0'                             //API for SQLiteDatabase and ContentResolver
 
     //Testing
     robolectricVersion = '3.1-SNAPSHOT'
@@ -85,6 +85,12 @@ ext {
             retrofitAdapter:        "com.squareup.retrofit2:adapter-rxjava:${retrofitVersion}",
             glide:                   "com.github.bumptech.glide:glide:${glideVersion}",
             glideOkhttp:            "com.github.bumptech.glide:okhttp3-integration:${glideOkhttp3Version}",
+            storIOSQLite:           "com.pushtorefresh.storio:sqlite:${storioVersion}",
+            storIOSQLiteAnnotations: "com.pushtorefresh.storio:sqlite-annotations:${storioVersion}",
+            storIOSQLiteAnnotationsProcessor: "com.pushtorefresh.storio:sqlite-annotations-processor:${storioVersion}",
+            storIOContentResolver: "com.pushtorefresh.storio:content-resolver:${storioVersion}",
+            storIOContentResolverAnnotations: "com.pushtorefresh.storio:content-resolver-annotations:${storioVersion}",
+            storIOContentResolverAnnotationsProcessor: "com.pushtorefresh.storio:content-resolver-annotations-processor:${storioVersion}",
     ]
 
     dataTestDependencies = [

@@ -41,7 +41,7 @@ public class NewsListPresenter extends BasePresenter<NewsListPresenter.View> {
 
     @Override
     public void onResume() {
-        this.loadNewsList();
+
     }
 
     @Override
@@ -58,12 +58,8 @@ public class NewsListPresenter extends BasePresenter<NewsListPresenter.View> {
     /**
      * Load News channel list.
      */
-    public void loadNewsChannelList(){
-        newsChannelEntityList = new ArrayList<>();
-        newsChannelEntityList.add(new NewsChannelEntity("社会", "social", "social", 0));
-        newsChannelEntityList.add(new NewsChannelEntity("体育", "tiyu", "tiyu", 1));
-        newsChannelEntityList.add(new NewsChannelEntity("娱乐", "huabian", "newtop", 2));
-        newsChannelEntityList.add(new NewsChannelEntity("科技", "keji", "keji", 3));
+    public void loadNewsChannelList(List<NewsChannelEntity> newsChannels){
+        newsChannelEntityList = newsChannels;
         Collections.sort(newsChannelEntityList, new Comparator<NewsChannelEntity>() {
             @Override
             public int compare(NewsChannelEntity entity1, NewsChannelEntity entity2) {
@@ -125,7 +121,7 @@ public class NewsListPresenter extends BasePresenter<NewsListPresenter.View> {
 
     public interface View<D> extends LoadDataView<D> {
         int getViewPagerLayoutId();
-        void initViewPages();
+        void initViewPages(List<NewsChannelEntity> newsChannels);
         void initTabLayout();
     }
 

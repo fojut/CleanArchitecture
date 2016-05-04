@@ -2,6 +2,9 @@ package org.fojut.sample.presentation.base.internal.di.component;
 
 import android.content.Context;
 
+import com.pushtorefresh.storio.sqlite.StorIOSQLite;
+
+import org.fojut.sample.data.common.db.internal.di.DbModule;
 import org.fojut.sample.domain.base.executor.PostExecutionThread;
 import org.fojut.sample.domain.base.executor.ThreadExecutor;
 import org.fojut.sample.presentation.base.internal.di.module.ApplicationModule;
@@ -13,7 +16,7 @@ import javax.inject.Singleton;
 import dagger.Component;
 
 @Singleton
-@Component(modules = ApplicationModule.class)
+@Component(modules = {ApplicationModule.class, DbModule.class})
 public interface ApplicationComponent {
     void inject(BaseActivity baseActivity);
     void inject(BaseFragment baseFragment);
@@ -22,4 +25,5 @@ public interface ApplicationComponent {
     Context context();
     ThreadExecutor threadExecutor();
     PostExecutionThread postExecutionThread();
+    StorIOSQLite storIOSQLite();
 }

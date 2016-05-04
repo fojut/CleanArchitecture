@@ -11,7 +11,9 @@ import org.fojut.sample.presentation.R;
 import org.fojut.sample.presentation.news.internal.di.component.DaggerNewsComponent;
 import org.fojut.sample.presentation.news.internal.di.component.NewsComponent;
 import org.fojut.sample.presentation.base.internal.di.extra.HasComponent;
+import org.fojut.sample.presentation.news.model.NewsChannelEntity;
 import org.fojut.sample.presentation.news.model.NewsEntity;
+import org.fojut.sample.presentation.news.presenter.NewsChannelPresenter;
 import org.fojut.sample.presentation.news.presenter.NewsListPresenter;
 import org.fojut.sample.presentation.news.view.adapter.NewsEntityAdapter;
 import org.fojut.sample.presentation.main.view.adapter.ViewPagerAdapter;
@@ -28,12 +30,14 @@ import butterknife.Bind;
  * Created by fojut on 2016/4/19.
  */
 public class NewsFragment extends BaseFragment implements HasComponent<NewsComponent>,
-        NewsListPresenter.View<List<NewsEntity>> {
+        NewsListPresenter.View<List<NewsEntity>>, NewsChannelPresenter.View {
 
     private static final String TAG = NewsFragment.class.getSimpleName();
 
     @Inject
     NewsListPresenter newsListPresenter;
+    @Inject
+    NewsChannelPresenter newsChannelPresenter;
 
     @Inject
     NewsEntityAdapter newsEntityAdapter;
@@ -67,9 +71,9 @@ public class NewsFragment extends BaseFragment implements HasComponent<NewsCompo
     protected void initView() {
         getComponent().inject(this);
         this.newsListPresenter.setView(this);
+        this.newsChannelPresenter.setView(this);
 
-        initViewPages();
-        initTabLayout();
+        this.newsChannelPresenter.getNewsChannels();
     }
 
     @Override
@@ -106,18 +110,21 @@ public class NewsFragment extends BaseFragment implements HasComponent<NewsCompo
     @Override
     public void onResume() {
         super.onResume();
+        this.newsChannelPresenter.onResume();
         this.newsListPresenter.onResume();
     }
 
     @Override
     public void onPause() {
         super.onPause();
+        this.newsChannelPresenter.onPause();
         this.newsListPresenter.onPause();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
+        this.newsChannelPresenter.onDestroy();
         this.newsListPresenter.onDestroy();
     }
 
@@ -134,9 +141,9 @@ public class NewsFragment extends BaseFragment implements HasComponent<NewsCompo
     }
 
     @Override
-    public void initViewPages() {
+    public void initViewPages(List<NewsChannelEntity> newsChannels) {
         if(viewPager.getAdapter() == null){
-            this.newsListPresenter.loadNewsChannelList();
+            this.newsListPresenter.loadNewsChannelList(newsChannels);
 
             viewPagerAdapter = new ViewPagerAdapter(context(), this.newsListPresenter.getNewsChannelViewList(),
                     this.newsListPresenter.getNewsChannelTitleList(), newsEntityAdapter);
@@ -175,5 +182,12 @@ public class NewsFragment extends BaseFragment implements HasComponent<NewsCompo
         });
 
 
+    }
+
+    @Override
+    public void loadChannels(List<NewsChannelEntity> newsChannels) {
+        initViewPages(newsChannels);
+        initTabLayout();
+        newsListPresenter.loadNewsList();
     }
 }

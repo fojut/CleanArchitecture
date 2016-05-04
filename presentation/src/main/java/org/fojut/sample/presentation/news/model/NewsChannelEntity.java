@@ -10,6 +10,9 @@ public class NewsChannelEntity {
     private String urlPath;
     private int priority;
 
+    public NewsChannelEntity() {
+    }
+
     public NewsChannelEntity(String title, String urlType, String urlPath, int priority) {
         this.title = title;
         this.urlType = urlType;
