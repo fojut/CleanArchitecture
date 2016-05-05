@@ -31,12 +31,12 @@ public class DensityUtils {
 		return deviceWidthHeight;
 	}
 	/**
-	 *
+	 * dp 转 px
 	 * @param context 上下文
 	 * @param dpValue dp数值
 	 * @return dp to  px
 	 */
-	public static int dip2px(Context context, float dpValue) {
+	public static int dp2px(Context context, float dpValue) {
 		final float scale = context.getResources().getDisplayMetrics().density;
 		return (int) (dpValue * scale + 0.5f);
 
@@ -58,14 +58,58 @@ public class DensityUtils {
 		}
 	}
 	/**
-	 *
+	 *  px 转 dp
 	 * @param context    上下文
 	 * @param pxValue  px的数值
 	 * @return  px to dp
 	 */
-	public static int px2dip(Context context, float pxValue) {
+	public static int px2dp(Context context, float pxValue) {
 		final float scale = context.getResources().getDisplayMetrics().density;
 		return (int) (pxValue / scale + 0.5f);
 
+	}
+
+	/**
+	 * pt 转 dp, 1pt＝1/72英寸
+	 * @param context
+	 * @param ptValue
+     * @return pt to dp
+     */
+	public static int pt2dp(Context context, float ptValue){
+		final float scale = context.getResources().getDisplayMetrics().xdpi;
+		return (int) (ptValue * scale * (1.0f / 72));
+	}
+
+	/**
+	 * sp 转 dp
+	 * @param context
+	 * @param spValue
+     * @return sp to dp
+     */
+	public static int sp2dp(Context context, float spValue){
+		final float scale = context.getResources().getDisplayMetrics().scaledDensity;
+		return (int) (spValue * scale);
+	}
+
+	/**
+	 * in(英寸) 转 dp
+	 * @param context
+	 * @param inValue
+     * @return in to dp
+     */
+	public static int in2dp(Context context, float inValue){
+		final float scale = context.getResources().getDisplayMetrics().xdpi;
+		return (int) (inValue * scale);
+	}
+
+	/**
+	 * mm(毫米) 转 dp
+	 * @param context
+	 * @param mmValue
+     * @return mm to dp
+     */
+	public static int mm2dp(Context context, float mmValue){
+		final float scale = context.getResources().getDisplayMetrics().xdpi;
+		return (int) (mmValue * scale * (1.0f / 25.4f));
 	}
 }
