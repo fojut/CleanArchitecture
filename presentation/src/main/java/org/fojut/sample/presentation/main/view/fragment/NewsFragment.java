@@ -67,8 +67,13 @@ public class NewsFragment extends BaseFragment implements HasComponent<NewsCompo
     }
 
     @Override
-    protected void initView() {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         getComponent().inject(this);
+    }
+
+    @Override
+    protected void initView() {
         this.newsListPresenter.setView(this);
         this.newsChannelPresenter.setView(this);
 
@@ -178,7 +183,7 @@ public class NewsFragment extends BaseFragment implements HasComponent<NewsCompo
 
     @Override
     public void resetSwipeRefreshLayout() {
-        mSwipeRefreshLayout = viewPagerAdapter.getItemSwipeRefreshLayoutByPosition(viewPager.getCurrentItem());
+        mSwipeRefreshLayout = viewPagerAdapter.getItemSwipeRefreshLayoutByPosition(this.newsListPresenter.getSelectedPosition());
         mSwipeRefreshLayout.setOnRefreshListener(this);
     }
 

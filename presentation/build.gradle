@@ -53,9 +53,6 @@ dependencies {
     provided presentationDependencies.javaxAnnotation
     compile presentationDependencies.butterKnife
 
-    //Development
-    compile developmentDependencies.leakCanary
-
     //UI design
     compile presentationDependencies.appcompat
     compile presentationDependencies.support
@@ -66,4 +63,9 @@ dependencies {
 
     testCompile presentationTestDependencies.junit
     testCompile presentationTestDependencies.mockito
+
+    //Development
+    debugCompile developmentDependencies.leakCanary
+    releaseCompile developmentDependencies.leakCanaryNoOp
+    testCompile developmentDependencies.leakCanaryNoOp
 }

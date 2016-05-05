@@ -17,11 +17,16 @@ import butterknife.ButterKnife;
 public abstract class BaseFragment extends Fragment {
 
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getApplicationComponent().inject(this);
+    }
+
     @Nullable @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         int layoutId = getLayoutId();
         View view = inflater.inflate(layoutId, container, false);
-        getApplicationComponent().inject(this);
         ButterKnife.bind(this, view);
         initView();
         return view;

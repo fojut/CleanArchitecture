@@ -1,6 +1,7 @@
 package org.fojut.sample.presentation.main.view.fragment;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -61,8 +62,13 @@ public class ImageFragment extends BaseFragment implements HasComponent<ImageCom
     }
 
     @Override
-    protected void initView() {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         getComponent().inject(this);
+    }
+
+    @Override
+    protected void initView() {
         imageListPresenter.setView(this);
 
         mSwipeRefreshLayout.setColorSchemeResources(R.color.primary,
