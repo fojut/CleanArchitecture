@@ -3,6 +3,7 @@ package org.fojut.sample.presentation.main.view.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -76,6 +77,7 @@ public class SettingFragment extends BaseFragment implements HasComponent<Downlo
 
     @OnClick(R.id.bt_download)
     public void downloadClick(){
+        downloadButton.setVisibility(View.GONE);
         downloadPresenter.download();
     }
 
@@ -116,6 +118,8 @@ public class SettingFragment extends BaseFragment implements HasComponent<Downlo
     @Override
     public void downloadComplete() {
         Log.d(TAG, "downloadComplete()");
+        progressBar.setProgress(0);
+        downloadButton.setVisibility(View.VISIBLE);
         Toast.makeText(context(), "TEST.apk " + getString(R.string.download_complete), Toast.LENGTH_SHORT).show();
     }
 }
