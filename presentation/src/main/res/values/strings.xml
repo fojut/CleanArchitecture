@@ -4,4 +4,6 @@
     <string name="loading_text">Loading...</string>
     <string name="loading_failure">Error!</string>
     <string name="loading_more">Loading more...</string>
+
+    <string name="download_complete">Download Complete!</string>
 </resources>
