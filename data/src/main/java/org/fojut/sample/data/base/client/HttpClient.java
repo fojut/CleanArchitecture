@@ -44,21 +44,21 @@ public class HttpClient {
      * @param progressView to update UI progress
      * @return
      */
-    public static OkHttpClient newProgressInstance(final ProgressView progressView) {
+    public static OkHttpClient newDownloadInstance(final ProgressView progressView) {
 
         /**
          * Progress interceptor
          */
-        Interceptor progressInterceptor = new Interceptor() {
+        Interceptor downloadProgressInterceptor = new Interceptor() {
 
             final ProgressListener progressListener = new ProgressListener() {
                 @Override public void update(long bytesRead, long contentLength, boolean done) {
                     int progress = new Long((100 * bytesRead) / contentLength).intValue();
                     if(progress >= 0){
                         progressView.setProgress(progress);
-                        Log.d(TAG, "Download progress ===> " + ((100 * bytesRead) / contentLength)+"% is done\n");
+//                        Log.d(TAG, "Download progress ===> " + ((100 * bytesRead) / contentLength)+"% is done\n");
                     } else {
-                        Log.e(TAG, "Download progress Error ===> " + ((100 * bytesRead) / contentLength)+"% is done\n");
+//                        Log.e(TAG, "Download progress Error ===> " + ((100 * bytesRead) / contentLength)+"% is done\n");
                     }
                 }
             };
@@ -75,7 +75,7 @@ public class HttpClient {
 
         return new OkHttpClient.Builder().retryOnConnectionFailure(true)
                 .addInterceptor(headerInterceptor)
-                .addNetworkInterceptor(progressInterceptor)
+                .addNetworkInterceptor(downloadProgressInterceptor)
                 .connectTimeout(30, TimeUnit.SECONDS).build();
     }
 
@@ -145,6 +145,8 @@ public class HttpClient {
      * Progress View
      */
     public interface ProgressView{
+        void onStart();
         void setProgress(int progress);
+        void onComplete();
     }
 }

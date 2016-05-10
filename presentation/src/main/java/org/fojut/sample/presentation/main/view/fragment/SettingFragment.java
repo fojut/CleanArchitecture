@@ -20,6 +20,9 @@ import org.fojut.sample.presentation.download.presenter.DownloadPresenter;
 import org.fojut.sample.presentation.user.view.activity.UserListActivity;
 import org.fojut.sample.presentation.base.view.fragment.BaseFragment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import butterknife.Bind;
@@ -29,7 +32,7 @@ import butterknife.OnClick;
  * Created by fojut on 2016/4/19.
  */
 public class SettingFragment extends BaseFragment implements HasComponent<DownloadComponent>,
-        DownloadPresenter.View, HttpClient.ProgressView {
+        DownloadPresenter.View {
 
     private static final String TAG = SettingFragment.class.getSimpleName();
 
@@ -40,6 +43,14 @@ public class SettingFragment extends BaseFragment implements HasComponent<Downlo
     ProgressBar progressBar;
     @Bind(R.id.bt_download)
     Button downloadButton;
+    @Bind(R.id.pb_download2)
+    ProgressBar progressBar2;
+    @Bind(R.id.bt_download2)
+    Button downloadButton2;
+    @Bind(R.id.pb_download3)
+    ProgressBar progressBar3;
+    @Bind(R.id.bt_download3)
+    Button downloadButton3;
 
     @Inject
     DownloadPresenter downloadPresenter;
@@ -75,10 +86,74 @@ public class SettingFragment extends BaseFragment implements HasComponent<Downlo
         startActivity(UserListActivity.getCallingIntent(getContext()));
     }
 
+
     @OnClick(R.id.bt_download)
     public void downloadClick(){
-        downloadButton.setVisibility(View.GONE);
-        downloadPresenter.download();
+        HttpClient.ProgressView progressView = new HttpClient.ProgressView() {
+            @Override
+            public void onStart() {
+
+            }
+
+            @Override
+            public void setProgress(int progress) {
+                progressBar.setProgress(progress);
+            }
+
+            @Override
+            public void onComplete() {
+                progressBar.setProgress(0);
+                downloadButton.setVisibility(View.VISIBLE);
+            }
+        };
+        downloadButton.setVisibility(View.INVISIBLE);
+        downloadPresenter.download(progressView);
+    }
+
+    @OnClick(R.id.bt_download2)
+    public void downloadClick2(){
+        HttpClient.ProgressView progressView2 = new HttpClient.ProgressView() {
+            @Override
+            public void onStart() {
+
+            }
+
+            @Override
+            public void setProgress(int progress) {
+                progressBar2.setProgress(progress);
+            }
+
+            @Override
+            public void onComplete() {
+                progressBar2.setProgress(0);
+                downloadButton2.setVisibility(View.VISIBLE);
+            }
+        };
+        downloadButton2.setVisibility(View.INVISIBLE);
+        downloadPresenter.download2(progressView2);
+    }
+
+    @OnClick(R.id.bt_download3)
+    public void downloadClick3(){
+        HttpClient.ProgressView progressView3 = new HttpClient.ProgressView() {
+            @Override
+            public void onStart() {
+
+            }
+
+            @Override
+            public void setProgress(int progress) {
+                progressBar3.setProgress(progress);
+            }
+
+            @Override
+            public void onComplete() {
+                progressBar3.setProgress(0);
+                downloadButton3.setVisibility(View.VISIBLE);
+            }
+        };
+        downloadButton3.setVisibility(View.INVISIBLE);
+        downloadPresenter.download3(progressView3);
     }
 
     @Override
@@ -93,6 +168,7 @@ public class SettingFragment extends BaseFragment implements HasComponent<Downlo
     public void onResume() {
         super.onResume();
         progressBar.setProgress(0);
+        progressBar2.setProgress(0);
     }
 
     @Override
@@ -107,19 +183,12 @@ public class SettingFragment extends BaseFragment implements HasComponent<Downlo
 
     @Override
     public void showError(String message) {
-
+        Log.e(TAG, message);
+        Toast.makeText(context(), message, Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void setProgress(int progress) {
-        progressBar.setProgress(progress);
-    }
-
-    @Override
-    public void downloadComplete() {
-        Log.d(TAG, "downloadComplete()");
-        progressBar.setProgress(0);
-        downloadButton.setVisibility(View.VISIBLE);
-        Toast.makeText(context(), "TEST.apk " + getString(R.string.download_complete), Toast.LENGTH_SHORT).show();
+    public void showCompleteMessage(String message) {
+        Toast.makeText(context(), message, Toast.LENGTH_SHORT).show();
     }
 }
