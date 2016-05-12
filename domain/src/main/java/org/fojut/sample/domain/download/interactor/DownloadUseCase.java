@@ -30,15 +30,15 @@ public class DownloadUseCase extends UseCase {
     public void execute(Subscriber useCaseSubscriber, Object... params) {
         final DownloadTask downloadTask = (DownloadTask) params[0];
         this.subscription = this.buildUseCaseObservable(params)
+                .subscribeOn(Schedulers.from(threadExecutor))            //subscribeOn只调用一次
                 .flatMap(new Func1<ResponseBody, Observable<Boolean>>() {
                     @Override
                     public Observable<Boolean> call(ResponseBody responseBody) {
-                        return DownloadApiService.writeDownloadFile(downloadTask, responseBody);
+                        return downloadTask.writeDownloadFile(responseBody);
                     }
-                })
-                .subscribeOn(Schedulers.io())
+                })      //由threadExecutor调用
                 .observeOn(postExecutionThread.getScheduler())
-                .subscribe(useCaseSubscriber);
+                .subscribe(useCaseSubscriber);      //observeOn指定，由postExecutionThread调用
     }
 
     @Override

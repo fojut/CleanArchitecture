@@ -14,11 +14,12 @@ import javax.inject.Singleton;
 @Singleton
 public class JobExecutor implements ThreadExecutor {
 
-    private static final int INITIAL_POOL_SIZE = 3;
-    private static final int MAX_POOL_SIZE = 5;
+    private static final int CORES = Runtime.getRuntime().availableProcessors();
+    private static final int INITIAL_POOL_SIZE = CORES + 1;
+    private static final int MAX_POOL_SIZE = CORES * 2 + 1;
 
     // Sets the amount of time an idle thread waits before terminating
-    private static final int KEEP_ALIVE_TIME = 10;
+    private static final int KEEP_ALIVE_TIME = 5;
 
     // Sets the Time Unit to seconds
     private static final TimeUnit KEEP_ALIVE_TIME_UNIT = TimeUnit.SECONDS;
