@@ -17,9 +17,6 @@ import org.fojut.sample.presentation.setting.internal.di.component.SettingCompon
 import org.fojut.sample.presentation.user.view.activity.UserListActivity;
 import org.fojut.sample.presentation.base.view.fragment.BaseFragment;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.inject.Inject;
 
 import butterknife.Bind;
