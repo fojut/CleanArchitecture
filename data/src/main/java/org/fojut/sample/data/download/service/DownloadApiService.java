@@ -18,16 +18,16 @@ public class DownloadApiService extends BaseApiService<DownloadApi> {
 
     private static final String TAG = DownloadApiService.class.getSimpleName();
 
-    public DownloadApiService(String baseUrl, HttpClient.ProgressView progressView) {
-        retrofit = new Retrofit.Builder().baseUrl(baseUrl)
-                .client(HttpClient.newDownloadInstance(progressView))
-                .addConverterFactory(GsonConverterFactory.create(getGson()))
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create()).build();
+    public DownloadApiService(String baseUrl) {
+        super(baseUrl);
     }
 
-    public static DownloadApiService getInstance(HttpClient.ProgressView progressView) {
+    private static class SingletonHolder{
+        private static DownloadApiService instance = new DownloadApiService(DownloadApiConstants.DOWNLOAD_HOST_URL);
+    }
 
-        return new DownloadApiService(DownloadApiConstants.DOWNLOAD_HOST_URL, progressView);
+    public static DownloadApiService getInstance(){
+        return SingletonHolder.instance;
     }
 
     public Observable<ResponseBody> downloadFile(String fileUrl){

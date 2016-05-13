@@ -3,14 +3,14 @@ package org.fojut.sample.data.download.task;
 import android.os.Environment;
 import android.util.Log;
 
-import org.fojut.sample.data.base.client.HttpClient;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.ResponseBody;
 import rx.Observable;
@@ -27,15 +27,16 @@ public class DownloadTask {
     private String name;
     private DownloadStatus status = DownloadStatus.WAITING;
     private boolean hasError = false;
-    private HttpClient.ProgressView progressView;
+    private List<ProgressListener> progressListeners;
 
     public DownloadTask() {
+        progressListeners = new ArrayList<>();
     }
 
-    public DownloadTask(String url, String name, HttpClient.ProgressView progressView) {
+    public DownloadTask(String url, String name) {
+        this();
         this.url = url;
         this.name = name;
-        this.progressView = progressView;
     }
 
     public String getUrl() {
@@ -66,12 +67,20 @@ public class DownloadTask {
         this.status = status;
     }
 
-    public HttpClient.ProgressView getProgressView() {
-        return progressView;
+    public List<ProgressListener> getProgressListeners() {
+        return progressListeners;
     }
 
-    public void setProgressView(HttpClient.ProgressView progressView) {
-        this.progressView = progressView;
+    public void setProgressListeners(List<ProgressListener> progressListeners) {
+        this.progressListeners = progressListeners;
+    }
+
+    public void addProgressListener(ProgressListener progressListener){
+        this.progressListeners.add(progressListener);
+    }
+
+    public void removeProgressListener(ProgressListener progressListener){
+        this.progressListeners.remove(progressListener);
     }
 
     public DownloadTask onDownloadingStatus(){
@@ -122,7 +131,7 @@ public class DownloadTask {
                 ", name='" + name + '\'' +
                 ", status=" + status +
                 ", hasError=" + hasError +
-                ", progressView=" + progressView +
+                ", progressListeners.size=" + progressListeners.size() +
                 '}';
     }
 
@@ -165,9 +174,17 @@ public class DownloadTask {
             makeDirs(file.getAbsolutePath());
             outputStream = new FileOutputStream(file);
             byte data[] = new byte[2048];
-            int length = -1;
-            while ((length = inputStream.read(data)) != -1) {
-                outputStream.write(data, 0, length);
+            int bytesRead = -1;
+            long totalBytesRead = 0L;
+            while ((bytesRead = inputStream.read(data)) != -1) {
+                outputStream.write(data, 0, bytesRead);
+                totalBytesRead += bytesRead != -1 ? bytesRead : 0;
+
+                int progress = new Long((100 * totalBytesRead) / responseBody.contentLength()).intValue();
+                for (ProgressListener progressListener : progressListeners){
+                    progressListener.setProgress(progress);
+                }
+
                 while (isPausingStatus()){
                     try {
                         Thread.currentThread().sleep(100L);
@@ -242,4 +259,7 @@ public class DownloadTask {
     }
 
 
+    public interface ProgressListener{
+        void setProgress(int progress);
+    }
 }

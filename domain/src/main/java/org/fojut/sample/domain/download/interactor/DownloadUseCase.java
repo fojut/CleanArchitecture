@@ -44,7 +44,7 @@ public class DownloadUseCase extends UseCase {
     @Override
     protected Observable buildUseCaseObservable(Object... params) {
         DownloadTask downloadTask = (DownloadTask) params[0];
-        return DownloadApiService.getInstance(downloadTask.getProgressView()).downloadFile(downloadTask.getUrl());
+        return DownloadApiService.getInstance().downloadFile(downloadTask.getUrl());
     }
 
 }
