@@ -31,7 +31,7 @@ The UI is not completed yet, just retrieve news from server...
 
 **Using Libraries**
 -----------------
-RxJava + Dagger2 + Retrofit2 + OkHttp3 + ButterKnife + StorIO
+RxJava + Dagger2 + Retrofit2 + OkHttp3 + ButterKnife + StorIO + RxBus
 
 **Testing**
 -----------------
