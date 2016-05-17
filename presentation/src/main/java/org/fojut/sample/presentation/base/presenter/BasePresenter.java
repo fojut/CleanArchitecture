@@ -15,6 +15,12 @@ public abstract class BasePresenter<V> implements HasView<V> {
 
   /**
    * Method that control the lifecycle of the view. It should be called in the view's
+   * (Activity or Fragment) onCreate() method.
+   */
+  public abstract void onStart();
+
+  /**
+   * Method that control the lifecycle of the view. It should be called in the view's
    * (Activity or Fragment) onResume() method.
    */
   public abstract void onResume();

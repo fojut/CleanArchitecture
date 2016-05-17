@@ -29,6 +29,11 @@ public class ImageListPresenter extends BasePresenter<ImageListPresenter.View> {
     }
 
     @Override
+    public void onStart() {
+
+    }
+
+    @Override
     public void onResume() {
 
     }

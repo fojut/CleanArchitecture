@@ -40,6 +40,11 @@ public class NewsListPresenter extends BasePresenter<NewsListPresenter.View> {
     }
 
     @Override
+    public void onStart() {
+
+    }
+
+    @Override
     public void onResume() {
 
     }

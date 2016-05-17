@@ -26,7 +26,7 @@ import butterknife.OnClick;
  * Created by fojut on 2016/4/19.
  */
 public class SettingFragment extends BaseFragment implements HasComponent<SettingComponent>,
-        SettingPresenter.View, DownloadManager.View {
+        SettingPresenter.View {
 
     private static final String TAG = SettingFragment.class.getSimpleName();
 
@@ -70,6 +70,7 @@ public class SettingFragment extends BaseFragment implements HasComponent<Settin
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getComponent().inject(this);
+        settingPresenter.onStart();
     }
 
     @Override
@@ -97,14 +98,8 @@ public class SettingFragment extends BaseFragment implements HasComponent<Settin
             return;
         }
 
-        DownloadTask.ProgressListener progressListener = new DownloadTask.ProgressListener() {
-            @Override
-            public void setProgress(int progress) {
-                progressBar.setProgress(progress);
-            }
-        };
         downloadButton.setText("Downloading");
-        settingPresenter.download(getViewKey(), progressListener);
+        settingPresenter.download();
     }
 
     @OnClick(R.id.bt_download2)
@@ -121,14 +116,8 @@ public class SettingFragment extends BaseFragment implements HasComponent<Settin
             return;
         }
 
-        DownloadTask.ProgressListener progressListener = new DownloadTask.ProgressListener() {
-            @Override
-            public void setProgress(int progress) {
-                progressBar2.setProgress(progress);
-            }
-        };
         downloadButton2.setText("Downloading");
-        settingPresenter.download2(getViewKey(), progressListener);
+        settingPresenter.download2();
     }
 
     @OnClick(R.id.bt_download3)
@@ -145,21 +134,8 @@ public class SettingFragment extends BaseFragment implements HasComponent<Settin
             return;
         }
 
-        DownloadTask.ProgressListener progressListener = new DownloadTask.ProgressListener() {
-            @Override
-            public void setProgress(int progress) {
-                progressBar3.setProgress(progress);
-            }
-
-        };
         downloadButton3.setText("Downloading");
-        settingPresenter.download3(getViewKey(), progressListener);
-        settingPresenter.addDownloadTask3Listener(new DownloadTask.ProgressListener(){
-            @Override
-            public void setProgress(int progress) {
-                progressBar3_2.setProgress(progress);
-            }
-        });
+        settingPresenter.download3();
     }
 
     @Override
@@ -170,15 +146,24 @@ public class SettingFragment extends BaseFragment implements HasComponent<Settin
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        settingPresenter.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        settingPresenter.onPause();
+    }
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
         settingPresenter.onDestroy();
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
+
 
     @Override
     public void showLoading() {
@@ -197,29 +182,46 @@ public class SettingFragment extends BaseFragment implements HasComponent<Settin
     }
 
     @Override
-    public void onComplete(Object arg) {
-        String taskName = (String) arg;
-        if(taskName.equalsIgnoreCase(settingPresenter.TASK_NAME_1)){
-            progressBar.setProgress(0);
-            downloadButton.setText("Download_osbuild");
-        }else if(taskName.equalsIgnoreCase(settingPresenter.TASK_NAME_2)){
-            progressBar2.setProgress(0);
-            downloadButton2.setText("Download_163");
-        }else if(taskName.equalsIgnoreCase(settingPresenter.TASK_NAME_3)){
-            progressBar3.setProgress(0);
-            progressBar3_2.setProgress(0);
-            downloadButton3.setText("Download_FM");
-        }
-        Toast.makeText(context(), taskName+" download complete!", Toast.LENGTH_SHORT).show();
+    public void onDownloadError(String message) {
+        showError(message);
     }
 
     @Override
-    public void onError(String message) {
-
+    public void setProgress1(int progress) {
+        progressBar.setProgress(progress);
     }
 
     @Override
-    public String getViewKey() {
-        return SettingFragment.class.getName();
+    public void setProgress2(int progress) {
+        progressBar2.setProgress(progress);
     }
+
+    @Override
+    public void setProgress3(int progress) {
+        progressBar3.setProgress(progress);
+        progressBar3_2.setProgress(progress);
+    }
+
+    @Override
+    public void onDownloadSuccess1(String name) {
+        progressBar.setProgress(0);
+        downloadButton.setText("Download_osbuild");
+        Toast.makeText(context(), name + " " + getString(R.string.download_complete), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onDownloadSuccess2(String name) {
+        progressBar2.setProgress(0);
+        downloadButton2.setText("Download_163");
+        Toast.makeText(context(), name + " " + getString(R.string.download_complete), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onDownloadSuccess3(String name) {
+        progressBar3.setProgress(0);
+        progressBar3_2.setProgress(0);
+        downloadButton3.setText("Download_FM");
+        Toast.makeText(context(), name + " " + getString(R.string.download_complete), Toast.LENGTH_SHORT).show();
+    }
+
 }

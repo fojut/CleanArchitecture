@@ -35,6 +35,11 @@ public class BottomBarPresenter extends BasePresenter<BottomBarPresenter.View> {
     }
 
     @Override
+    public void onStart() {
+
+    }
+
+    @Override
     public void onResume() {
 
     }

@@ -22,6 +22,7 @@ ext {
     glideOkhttp3Version = '1.4.0@aar'                   //Image Load with okHttp3
     bottomBarVersion = '1.3.3'                          //UI bottom bar
     storioVersion = '1.8.0'                             //API for SQLiteDatabase and ContentResolver
+    rxBusVersion = '1.0.3'                              //RxBus
 
     //Testing
     robolectricVersion = '3.1-SNAPSHOT'
@@ -48,6 +49,7 @@ ext {
             rxJava:             "io.reactivex:rxjava:${rxJavaVersion}",
             rxAndroid:          "io.reactivex:rxandroid:${rxAndroidVersion}",
             javaxAnnotation:    "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
+            rxBus:               "com.hwangjr.rxbus:rxbus:${rxBusVersion}",
     ]
 
     presentationTestDependencies = [
@@ -85,6 +87,7 @@ ext {
             retrofitAdapter:        "com.squareup.retrofit2:adapter-rxjava:${retrofitVersion}",
             glide:                   "com.github.bumptech.glide:glide:${glideVersion}",
             glideOkhttp:            "com.github.bumptech.glide:okhttp3-integration:${glideOkhttp3Version}",
+            rxBus:                   "com.hwangjr.rxbus:rxbus:${rxBusVersion}",
             storIOSQLite:           "com.pushtorefresh.storio:sqlite:${storioVersion}",
             storIOSQLiteAnnotations: "com.pushtorefresh.storio:sqlite-annotations:${storioVersion}",
             storIOSQLiteAnnotationsProcessor: "com.pushtorefresh.storio:sqlite-annotations-processor:${storioVersion}",

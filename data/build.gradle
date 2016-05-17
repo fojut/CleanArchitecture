@@ -64,6 +64,7 @@ dependencies {
     compile dataDependencies.gson
     compile dataDependencies.rxJava
     compile dataDependencies.rxAndroid
+    compile dataDependencies.rxBus
 
     testCompile dataTestDependencies.junit
     testCompile dataTestDependencies.assertj

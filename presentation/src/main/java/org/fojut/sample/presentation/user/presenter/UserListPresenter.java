@@ -24,6 +24,11 @@ public class UserListPresenter extends BasePresenter<UserListPresenter.View> {
     }
 
     @Override
+    public void onStart() {
+
+    }
+
+    @Override
     public void onResume() {
 
     }

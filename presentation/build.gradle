@@ -52,6 +52,7 @@ dependencies {
     provided presentationDependencies.dagger
     provided presentationDependencies.javaxAnnotation
     compile presentationDependencies.butterKnife
+    compile presentationDependencies.rxBus
 
     //UI design
     compile presentationDependencies.appcompat

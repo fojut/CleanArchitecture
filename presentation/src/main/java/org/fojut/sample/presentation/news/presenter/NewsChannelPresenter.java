@@ -32,6 +32,11 @@ public class NewsChannelPresenter extends BasePresenter<NewsChannelPresenter.Vie
     }
 
     @Override
+    public void onStart() {
+
+    }
+
+    @Override
     public void onResume() {
 
     }
