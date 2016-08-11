@@ -1,4 +1,4 @@
-package org.fojut.sample.presentation.main.presenter;
+package org.fojut.sample.presentation.setting.presenter;
 
 import com.hwangjr.rxbus.annotation.Subscribe;
 import com.hwangjr.rxbus.annotation.Tag;

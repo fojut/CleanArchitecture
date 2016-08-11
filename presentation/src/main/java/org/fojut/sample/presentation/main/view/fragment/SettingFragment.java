@@ -7,11 +7,9 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import org.fojut.sample.data.download.task.DownloadTask;
 import org.fojut.sample.presentation.R;
 import org.fojut.sample.presentation.base.internal.di.extra.HasComponent;
-import org.fojut.sample.presentation.download.manager.DownloadManager;
-import org.fojut.sample.presentation.main.presenter.SettingPresenter;
+import org.fojut.sample.presentation.setting.presenter.SettingPresenter;
 import org.fojut.sample.presentation.setting.internal.di.component.DaggerSettingComponent;
 import org.fojut.sample.presentation.setting.internal.di.component.SettingComponent;
 import org.fojut.sample.presentation.user.view.activity.UserListActivity;
