@@ -3,8 +3,6 @@
 -----------------
 This is a sample android app based on MVP Clean Architecture.
 
-The UI is not completed yet, just retrieve news from server...
-
 **MVP-Architecture**
 -----------------
 ![MVP-Architecture](http://upload-images.jianshu.io/upload_images/268450-3951595406461dee.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
